@@ -114,6 +114,13 @@ textarea { resize: vertical; border: 1px solid var(--border); }
 .ability-chip { background: #fff; border: 1px solid var(--border2); padding: 2px 7px; font-size: 10.5px; color: var(--ink2); }
 .ability-chip.variant { border-color: var(--accent); color: var(--accent); }
 
+/* SMART EFFECT ACTION CHIPS */
+.action-chips { display:flex; gap:5px; flex-wrap:wrap; align-items:center; margin-top:6px; }
+.act-chips-lbl { font-size:8px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-right:1px; }
+.act-chip { display:inline-flex; align-items:center; gap:4px; background:var(--accent); color:#fff; border:none; cursor:pointer; font-family:'Georgia',serif; font-size:10px; padding:2px 9px; transition:all .1s; }
+.act-chip:hover { background:#a07f44; }
+.act-chip::before { content:'\2680'; font-size:11px; line-height:1; opacity:.85; }
+
 /* BACKGROUND BONUS */
 .bg-bonus-row { display: flex; gap: 8px; align-items: end; flex-wrap: wrap; margin-top: 8px; }
 .bg-bonus-item { display: flex; gap: 4px; align-items: center; }
@@ -328,6 +335,60 @@ textarea { resize: vertical; border: 1px solid var(--border); }
 .dhtime { font-size: 9px; color: var(--border); }
 .last-roll-note { font-size: 9px; color: var(--muted); text-align: center; font-style: italic; }
 
+/* TABLE (multiplayer) */
+.table-panel{position:fixed;left:0;top:0;bottom:0;width:304px;background:var(--surface);border-right:1px solid var(--border2);z-index:998;transform:translateX(-100%);transition:transform .2s ease;display:flex;flex-direction:column;}
+.table-panel.open{transform:translateX(0);}
+.tp-head{background:var(--rule);padding:8px 12px;display:flex;align-items:center;justify-content:space-between;}
+.tp-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#fff;font-family:Georgia,serif;}
+.tp-body{flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:7px;}
+.tp-sec-h{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);padding-bottom:3px;margin-top:6px;}
+.tp-status{font-size:11px;color:var(--ink2);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.tp-combatant{display:flex;flex-direction:column;gap:1px;background:var(--surface2);border:1px solid var(--border);padding:5px 8px;}
+.tc-name{font-size:12px;color:var(--ink);}
+.tc-hp{font-size:10px;color:var(--muted);font-family:Consolas,monospace;}
+.tc-role{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--accent);}
+.tp-log{display:flex;flex-direction:column;gap:2px;max-height:220px;overflow-y:auto;}
+.tp-log-line{font-size:10.5px;color:var(--ink2);}
+.tl-t{color:var(--border2);font-family:Consolas,monospace;font-size:9px;margin-right:3px;}
+.tp-prompt{position:relative;background:#fff;border:1px solid var(--accent);border-left:3px solid var(--accent);padding:7px 9px;margin-bottom:4px;}
+.tp-prompt-h{font-size:11px;color:var(--ink);margin-bottom:5px;padding-right:14px;}
+.tp-prompt-x{position:absolute;right:6px;top:4px;cursor:pointer;color:var(--muted);font-size:13px;}
+.tp-empty{font-size:10px;color:var(--muted);font-style:italic;}
+.tp-setup textarea,.tp-field textarea{min-height:88px;font-family:Consolas,monospace;font-size:10px;}
+.tp-field{margin-bottom:6px;}
+.tp-field label{display:block;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:2px;}
+.tp-btn{padding:5px 12px;border:1px solid var(--accent);background:var(--accent);color:#fff;font-family:Georgia,serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;}
+.tp-btn.ghost{background:none;color:var(--ink2);border-color:var(--border2);}
+.tp-note{font-size:9px;color:var(--muted);font-style:italic;line-height:1.55;}
+.tp-note a{color:#4e7fa5;}
+.act-send{display:inline-flex;align-items:center;background:none;border:1px dashed var(--accent);color:var(--accent);cursor:pointer;font-family:Georgia,serif;font-size:10px;padding:2px 8px;}
+.act-send:hover{background:var(--accent);color:#fff;}
+.tgt-menu{position:fixed;z-index:2000;background:#fff;border:1px solid var(--border2);box-shadow:0 4px 14px rgba(0,0,0,.25);display:flex;flex-direction:column;min-width:130px;}
+.tgt-item{text-align:left;background:none;border:none;border-bottom:1px solid var(--border);padding:6px 10px;cursor:pointer;font-family:Georgia,serif;font-size:11px;color:var(--ink);}
+.tgt-item:hover{background:var(--surface2);}
+.tgt-empty{padding:6px 10px;font-size:10px;color:var(--muted);}
+.tp-combatant.clickable{cursor:pointer;}
+.tp-combatant.clickable:hover{border-color:var(--accent);}
+.gate-editor{background:#fff;border:1px solid var(--accent);border-left:3px solid var(--accent);padding:8px 10px;margin-bottom:6px;}
+.ge-head{font-size:11px;color:var(--ink);font-weight:bold;display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
+.ge-x{cursor:pointer;color:var(--muted);font-size:14px;}
+.ge-grp{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin:6px 0 3px;}
+.ge-row{display:flex;flex-wrap:wrap;gap:4px;}
+.gate-tog{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--border2);background:var(--surface2);color:var(--ink2);font-family:Georgia,serif;font-size:9.5px;padding:2px 6px;cursor:pointer;}
+.gate-tog span{font-size:8px;font-weight:bold;letter-spacing:1px;}
+.gate-tog.on{border-color:#3a8050;}
+.gate-tog.on span{color:#3a8050;}
+.gate-tog.off{opacity:.6;}
+.gate-tog.off span{color:#b03020;}
+.ge-foot{display:flex;gap:6px;margin-top:8px;}
+.pe-gated-note{font-size:9px;color:#b88a20;font-style:italic;margin-top:4px;}
+.bg-mech-status{font-size:9px;letter-spacing:1px;text-transform:uppercase;font-weight:bold;}
+.bg-mech-status.off{color:var(--muted);}
+.bg-mech-status.on{color:#3a8050;}
+.bg-mech-btn{padding:2px 9px;border:1px solid var(--accent);background:none;color:var(--accent);font-family:'Georgia',serif;font-size:9px;cursor:pointer;}
+.bg-mech-btn:hover{background:var(--accent);color:#fff;}
+.bg-mech-btn:disabled{opacity:.5;cursor:default;background:none;color:var(--accent);}
+
 /* EXPORT MODAL */
 .modal-bg {
   position: fixed; inset: 0; background: rgba(10,10,10,0.55);
@@ -353,7 +414,7 @@ textarea { resize: vertical; border: 1px solid var(--border); }
 }
 
 @media print {
-  .topbar, .dice-panel, .modal-bg { display: none !important; }
+  .topbar, .dice-panel, .table-panel, .modal-bg { display: none !important; }
   body { background: white; padding: 5px; }
   .section-head { background: #222 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
@@ -409,13 +470,24 @@ textarea { resize: vertical; border: 1px solid var(--border); }
   </div>
 </div>
 
+<!-- TABLE PANEL (multiplayer) -->
+<div class="table-panel" id="tablePanel">
+  <div class="tp-head">
+    <span class="tp-title">Table</span>
+    <button class="dp-close" onclick="toggleTable()">x</button>
+  </div>
+  <div class="tp-body" id="tableBody"></div>
+</div>
+
 <!-- TOPBAR -->
 <div class="topbar">
   <div class="title">W.T.E Character Sheet</div>
   <div class="topbar-right">
+    <button class="btn" onclick="toggleTable()">Table</button>
     <button class="btn" onclick="toggleDice()">Dice</button>
     <span class="sep">|</span>
     <button class="btn prime" onclick="openExport()">Export</button>
+    <button class="btn" onclick="openWiki()">Wiki</button>
     <button class="btn" onclick="saveSheet()">Save</button>
     <button class="btn" onclick="loadSheet()">Load</button>
     <button class="btn" onclick="clearSheet()">Clear</button>
@@ -480,17 +552,23 @@ textarea { resize: vertical; border: 1px solid var(--border); }
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:5px;">
         <div class="info-label">Species Affinity</div>
         <span class="info-value" id="sp-family" style="font-size:11px;color:var(--muted);"></span>
+        <span id="sp-sync" style="font-size:9px;letter-spacing:1px;"></span>
+        <a id="sp-wiki" href="#" target="_blank" rel="noopener" style="display:none;margin-left:auto;font-size:9px;letter-spacing:1px;color:#4e7fa5;text-decoration:none;">View on wiki &#8599;</a>
       </div>
       <div class="spec-bonus-tags" id="sp-bonus-tags"></div>
       <div class="info-label" style="margin-top:6px;">Innate Abilities <span id="sp-note" style="text-transform:none;letter-spacing:0;font-style:italic;color:var(--accent);"></span></div>
       <div class="ability-chip-row" id="sp-innate"></div>
+      <div class="action-chips" id="sp-innate-actions"></div>
       <div class="info-label" id="sp-variant-lbl" style="margin-top:8px;display:none;">Variant Abilities</div>
       <div class="ability-chip-row" id="sp-variant-abilities"></div>
+      <div class="action-chips" id="sp-variant-actions"></div>
     </div>
 
     <!-- PARADIGM INFO -->
     <div class="info-box" id="paradigm-box">
-      <div class="info-label" style="margin-bottom:5px;">Paradigm Access</div>
+      <div class="info-label" style="margin-bottom:5px;display:flex;align-items:center;gap:10px;">Paradigm Access
+        <a id="pi-wiki" href="#" target="_blank" rel="noopener" style="font-size:9px;letter-spacing:1px;color:#4e7fa5;text-decoration:none;">View on wiki &#8599;</a>
+      </div>
       <div class="info-row">
         <div class="info-item"><div class="info-label">Rank Title</div><div class="info-value" id="pi-title">&mdash;</div></div>
         <div class="info-item"><div class="info-label">Light Weapon</div><div class="info-value" id="pi-light">&mdash;</div></div>
@@ -510,6 +588,15 @@ textarea { resize: vertical; border: 1px solid var(--border); }
         </select>
       </div>
       <div class="bg-bonus-row" id="bg-bonus-row"></div>
+      <div class="bg-mechanic" id="bg-mechanic" style="display:none;margin-top:8px;border-top:1px solid var(--border);padding-top:7px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div class="info-label">Active Mechanic</div>
+          <span id="bg-mech-status" class="bg-mech-status off">Inactive</span>
+          <button class="bg-mech-btn" id="bg-mech-toggle" onclick="toggleBgMechanic()">Activate</button>
+        </div>
+        <div class="info-value" id="bg-mech-trigger" style="font-size:11px;margin-top:3px;"></div>
+        <div class="info-value" id="bg-mech-effect" style="font-size:11px;color:var(--accent);margin-top:2px;"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -631,13 +718,14 @@ textarea { resize: vertical; border: 1px solid var(--border); }
   <div class="section-head">Pressure Engine <span>situation resolution &middot; AAV vs PE</span></div>
   <div class="section-body" style="padding:9px 12px;">
     <div class="pe-top">
-      <div class="field" style="margin:0;"><label>Current PE</label><input type="number" id="pe-val" min="0" max="200" value="50" oninput="updatePEState()"></div>
+      <div class="field" style="margin:0;"><label>Current PE / BP</label><input type="number" id="pe-val" min="0" max="200" value="50" oninput="onPEValInput()"></div>
       <div><div class="pe-mini">State</div><div class="pe-state tense" id="pe-state">TENSE</div></div>
       <div><div class="pe-mini">Rank Mult</div><div class="pe-mini"><b id="pe-mult">&times;1.0</b></div></div>
       <div><div class="pe-mini">Final Complexity <span style="text-transform:none;letter-spacing:0;">(Insp &minus; Tax)</span></div><div class="pe-mini"><b id="pe-cplx">0</b></div></div>
     </div>
     <div class="formula-note" style="margin-bottom:6px;">Per skill: (1d40 + Specialty pts + Attribute Mod + Complexity) &times; Rank Mult. Choose 1&ndash;4 skills; 3 skills +1, 4 skills +2 Complexity Bonus.</div>
     <div id="pe-skills"></div>
+    <div class="pe-gated-note" id="pe-gate-note" style="display:none;">Curator has restricted which stats you can roll for this challenge.</div>
     <div class="pe-actions">
       <button class="pe-resolve" onclick="resolvePE()">Resolve Roll</button>
       <button class="pe-apply" onclick="resetPESkills()">Clear Skills</button>
@@ -693,6 +781,8 @@ textarea { resize: vertical; border: 1px solid var(--border); }
 <div class="section">
   <div class="section-head">Genus Loadout <span id="genus-head-note">5 at creation &middot; +1 per rank</span></div>
   <div class="section-body" style="padding:7px 10px;">
+    <div class="wpn-type-hint" id="genus-domain-note">Pick a Paradigm to filter Genus by its energy domains.</div>
+    <datalist id="genus-options"></datalist>
     <table class="data-table">
       <thead><tr><th style="width:18px;">#</th><th style="width:140px;">Name</th><th style="width:100px;">Energy Domain</th><th style="width:90px;">Action Cost</th><th style="width:55px;">SS Cost</th><th>Effect</th></tr></thead>
       <tbody id="genus-body"></tbody>
@@ -737,9 +827,13 @@ textarea { resize: vertical; border: 1px solid var(--border); }
   <div class="section" style="flex:0.70">
     <div class="section-head">Paradigm Cipher</div>
     <div class="section-body">
-      <div style="font-size:9px;color:var(--muted);margin-bottom:8px;">DNA-locked. Offline TL&le;2.0 &middot; Online TL&ge;3.0. Grows with rank.</div>
+      <div style="font-size:9px;color:var(--muted);margin-bottom:6px;">DNA-locked. Offline TL&le;2.0 &middot; Online TL&ge;3.0. Grows with rank.</div>
+      <div class="wpn-type-hint" id="cipher-domain-note">Pick a Paradigm to load its Ciphers.</div>
+      <datalist id="cipher-options"></datalist>
+      <div class="field"><label>Cipher (pick from Paradigm)</label><input type="text" id="c-pick" list="cipher-options" autocomplete="off" onfocus="loadCiphersForParadigm()" onchange="onCipherPick()" placeholder="search ciphers…"></div>
+      <div id="cipher-block-note" class="pe-gated-note" style="display:none;">&#9888; Online Ciphers deactivated by the Curator.</div>
       <div class="cgrid">
-        <div class="field"><label>Type</label><select id="c-type"><option>Offline</option><option>Online</option></select></div>
+        <div class="field"><label>Type</label><select id="c-type" onchange="applyOnlineCipherState()"><option>Offline</option><option>Online</option></select></div>
         <div class="field"><label>TL</label><input type="number" id="c-tl" min="1" max="5" step="0.5"></div>
         <div></div>
       </div>
@@ -752,6 +846,7 @@ textarea { resize: vertical; border: 1px solid var(--border); }
         </div>
       </div>
       <div class="field" style="margin-top:7px;"><label>Primary Cipher Benefits</label><textarea id="c-benefits" style="min-height:50px;"></textarea></div>
+      <div class="action-chips" id="cipher-chips"></div>
       <div style="margin-top:7px;">
         <div class="vsub">Additional Ciphers</div>
         <div class="alist" id="cipher-list">
@@ -772,10 +867,14 @@ textarea { resize: vertical; border: 1px solid var(--border); }
     <div class="row" style="gap:18px;">
       <div style="flex:1.1">
         <div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;">Weapons</div>
-        <div class="ewpn"><div class="field"><label>Weapon 1</label><input type="text" id="w1-name"></div><div class="field"><label>Type</label><select id="w1-type"><option>Light</option><option>Medium</option><option>Heavy</option></select></div><div class="field"><label>Damage</label><input type="text" id="w1-dmg"></div></div>
-        <div class="ewpn"><div class="field"><label>Weapon 2</label><input type="text" id="w2-name"></div><div class="field"><label>Type</label><select id="w2-type"><option>Light</option><option>Medium</option><option>Heavy</option></select></div><div class="field"><label>Damage</label><input type="text" id="w2-dmg"></div></div>
-        <div class="ewpn"><div class="field"><label>Weapon 3</label><input type="text" id="w3-name"></div><div class="field"><label>Type</label><select id="w3-type"><option>Light</option><option>Medium</option><option>Heavy</option></select></div><div class="field"><label>Damage</label><input type="text" id="w3-dmg"></div></div>
-        <div class="ewpn" style="margin-bottom:0;"><div class="field"><label>Weapon 4</label><input type="text" id="w4-name"></div><div class="field"><label>Type</label><select id="w4-type"><option>Light</option><option>Medium</option><option>Heavy</option></select></div><div class="field"><label>Damage</label><input type="text" id="w4-dmg"></div></div>
+        <div class="ewpn"><div class="field"><label>Weapon 1</label><input type="text" id="w1-name" oninput="renderWeaponChips(1)"></div><div class="field"><label>Type</label><select id="w1-type"><option>Light</option><option>Medium</option><option>Heavy</option></select></div><div class="field"><label>Damage</label><input type="text" id="w1-dmg" oninput="renderWeaponChips(1)"></div></div>
+        <div class="action-chips" id="wpn-chips-1"></div>
+        <div class="ewpn"><div class="field"><label>Weapon 2</label><input type="text" id="w2-name" oninput="renderWeaponChips(2)"></div><div class="field"><label>Type</label><select id="w2-type"><option>Light</option><option>Medium</option><option>Heavy</option></select></div><div class="field"><label>Damage</label><input type="text" id="w2-dmg" oninput="renderWeaponChips(2)"></div></div>
+        <div class="action-chips" id="wpn-chips-2"></div>
+        <div class="ewpn"><div class="field"><label>Weapon 3</label><input type="text" id="w3-name" oninput="renderWeaponChips(3)"></div><div class="field"><label>Type</label><select id="w3-type"><option>Light</option><option>Medium</option><option>Heavy</option></select></div><div class="field"><label>Damage</label><input type="text" id="w3-dmg" oninput="renderWeaponChips(3)"></div></div>
+        <div class="action-chips" id="wpn-chips-3"></div>
+        <div class="ewpn" style="margin-bottom:0;"><div class="field"><label>Weapon 4</label><input type="text" id="w4-name" oninput="renderWeaponChips(4)"></div><div class="field"><label>Type</label><select id="w4-type"><option>Light</option><option>Medium</option><option>Heavy</option></select></div><div class="field"><label>Damage</label><input type="text" id="w4-dmg" oninput="renderWeaponChips(4)"></div></div>
+        <div class="action-chips" id="wpn-chips-4"></div>
       </div>
       <div style="flex:0.70">
         <div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;">Defense &amp; Gear</div>
@@ -815,6 +914,28 @@ textarea { resize: vertical; border: 1px solid var(--border); }
       <span class="hint">Copy, then paste (Ctrl+V) into a Google Doc &mdash; formatting is preserved.</span>
     </div>
     <div class="modal-body"><div id="exportRender"></div></div>
+  </div>
+</div>
+
+<!-- WIKI MODAL -->
+<div class="modal-bg" id="wikiModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <span class="mt">Wiki Character</span>
+      <span class="mx" onclick="closeWiki()">x</span>
+    </div>
+    <div class="modal-body">
+      <div class="tp-sec-h" style="border:none;">Import from Wiki</div>
+      <div class="tp-note">Enter a wiki page name (your character blog/profile). The sheet reads a <b>WTE-SHEET</b> block on that page and loads the character. Builds the rest (derived stats, abilities) automatically.</div>
+      <div style="display:flex;gap:6px;margin:8px 0 16px;">
+        <input type="text" id="wiki-page-input" placeholder="e.g. User blog:You/My Inquisitor" style="flex:1;">
+        <button class="btn prime" onclick="importFromWiki()" style="color:#fff;white-space:nowrap;">Import character</button>
+      </div>
+      <div class="tp-sec-h" style="border:none;">Your character's wiki template</div>
+      <div class="tp-note">Copy this block and paste it anywhere on your wiki page. Anyone can then import this character by entering your page name above. (Raw Save-file JSON also works in a WTE-SHEET block.)</div>
+      <textarea id="wiki-template-out" readonly style="width:100%;min-height:240px;font-family:Consolas,monospace;font-size:11px;margin-top:8px;border:1px solid var(--border);"></textarea>
+      <button class="btn" onclick="copyWikiTemplate()" style="margin-top:8px;border-color:var(--border2);color:var(--ink2);">Copy template</button>
+    </div>
   </div>
 </div>
 
@@ -893,11 +1014,11 @@ function makeAsymRow(n) {
 function makeGenusRow(n) {
   const tr = document.createElement('tr'); tr.id='genus-row-'+n;
   tr.innerHTML=`<td class="rn">${n}</td>
-    <td><input type="text" id="gn-name-${n}"></td>
+    <td><input type="text" id="gn-name-${n}" list="genus-options" autocomplete="off" onfocus="loadGenusForParadigm()" onchange="onGenusPick(${n})" oninput="renderActionChips('gn-fx-${n}','gn-chips-${n}','gn-name-${n}')"></td>
     <td><select id="gn-dom-${n}" style="font-size:11px;"><option value="">&mdash;</option><option>Neutral</option><option>Eldritch</option><option>Null</option><option>Elemental</option><option>Kinetic</option></select></td>
     <td><input type="text" id="gn-act-${n}"></td>
     <td><input type="number" id="gn-ss-${n}" min="0"></td>
-    <td><textarea id="gn-fx-${n}" style="min-height:22px;"></textarea></td>`;
+    <td><textarea id="gn-fx-${n}" style="min-height:22px;" oninput="renderActionChips('gn-fx-${n}','gn-chips-${n}','gn-name-${n}')"></textarea><div class="action-chips" id="gn-chips-${n}"></div></td>`;
   return tr;
 }
 function buildInitialRows() {
@@ -955,69 +1076,332 @@ function updateCipherBtn(){
 // ════════════════════════════════════════════════════
 // SPECIES
 // ════════════════════════════════════════════════════
-function onSpeciesChange(){
+// ── WIKI LIVE-SYNC (Fandom MediaWiki API) ──────────────────
+// Local SPECIES_DATA is the offline fallback + home of the concrete numbers
+// (bonuses, which aren't on the wiki). At runtime we overlay the wiki's current
+// innate abilities & variants on top so ability text never drifts from canon.
+const WIKI_BASE='https://wonderland-of-the-enigma.fandom.com';
+const wikiSpeciesCache={};   // name -> {innate:[{name,desc}], variants:{Name:[{name,desc}]}, url}
+function wikiPageUrl(t){return WIKI_BASE+'/wiki/'+encodeURIComponent(String(t).replace(/ /g,'_'));}
+function cleanWiki(s){
+  return (s||'')
+    .replace(/<br\s*\/?>/gi,' ')
+    .replace(/'''?/g,'')
+    .replace(/\[\[[^\]|]*\|([^\]]*)\]\]/g,'$1')
+    .replace(/\[\[([^\]]*)\]\]/g,'$1')
+    .replace(/<[^>]+>/g,'')
+    .replace(/&nbsp;/gi,' ').replace(/&amp;/gi,'&').replace(/&mdash;/gi,'—').replace(/&minus;/gi,'−')
+    .replace(/\s+/g,' ').trim();
+}
+function wSection(wt,heading){
+  const h=heading.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  const m=wt.match(new RegExp('==\\s*'+h+'\\s*==([\\s\\S]*?)(?=\\n==[^=]|$)','i'));
+  return m?m[1]:'';
+}
+function wCell(line){
+  let s=line.replace(/^[|!]+/,'').trim();   // strip leading pipe/bang markers
+  const i=s.indexOf('|');                    // split attrs | content (space-optional)
+  if(i>=0 && s.slice(0,i).includes('=')) s=s.slice(i+1); // drop the style/attrs segment
+  return s.trim();
+}
+function wTables(s){const out=[];const re=/\{\|[\s\S]*?\|\}/g;let m;while((m=re.exec(s)))out.push(m[0]);return out;}
+function wAbilityTable(section){
+  const t=wTables(section);
+  return t.find(x=>/\|\s*(Effect|Description)\b/i.test(x)) || t.find(x=>/Ability/i.test(x)) || null;
+}
+function wParseAbilities(tbl){
+  if(!tbl)return[];
+  const rows=[];let cur=[];
+  tbl.split('\n').forEach(raw=>{
+    const t=raw.trim();
+    if(t.startsWith('|-')){if(cur.length)rows.push(cur);cur=[];}
+    else if(t.startsWith('!')){cur.push({hdr:true});}
+    else if(t.startsWith('|')&&t!=='|}'&&!t.startsWith('|+')){
+      const bold=/font-weight:\s*bold/i.test(t),color=/color:\s*#[0-9a-fA-F]/i.test(t);
+      cur.push({text:wCell(t),name:bold&&color});
+    }
+  });
+  if(cur.length)rows.push(cur);
+  const out=[];
+  rows.forEach(r=>{
+    if(r.some(c=>c.hdr)||!r.length)return;
+    if(r[0].name){
+      const name=cleanWiki(r[0].text);
+      const desc=cleanWiki(r.slice(1).map(c=>c.text).join(' — '));
+      if(name)out.push({name,desc});
+    }
+  });
+  return out;
+}
+function wParseVariants(wt){
+  const sec=wSection(wt,'VARIANTS');if(!sec)return {};
+  const re=/<div style="font-size:1\.1em;font-weight:bold;[^"]*font-family:monospace[^"]*">([^<]+)<\/div>/g;
+  const marks=[];let m;
+  while((m=re.exec(sec)))marks.push({name:cleanWiki(m[1]),idx:m.index});
+  const out={};
+  marks.forEach((mk,i)=>{
+    const chunk=sec.slice(mk.idx, i+1<marks.length?marks[i+1].idx:sec.length);
+    out[mk.name]=wParseAbilities(wAbilityTable(chunk));
+  });
+  return out;
+}
+async function fetchSpeciesWiki(name){
+  if(wikiSpeciesCache[name])return wikiSpeciesCache[name];
+  const url=WIKI_BASE+'/api.php?action=parse&prop=wikitext&format=json&origin=*&page='+encodeURIComponent(name);
+  const r=await fetch(url); if(!r.ok)throw new Error('HTTP '+r.status);
+  const j=await r.json(); if(j.error)throw new Error(j.error.info||'wiki error');
+  const wt=j.parse.wikitext['*'];
+  const data={innate:wParseAbilities(wAbilityTable(wSection(wt,'INNATE ABILITIES'))),variants:wParseVariants(wt),url:wikiPageUrl(name)};
+  wikiSpeciesCache[name]=data; return data;
+}
+function setSpeciesSync(state){
+  const el=document.getElementById('sp-sync'); if(!el)return;
+  if(!state){el.textContent='';return;}
+  if(state==='loading'){el.textContent='⟳ syncing…';el.style.color='var(--muted)';}
+  else if(state==='synced'){el.textContent='✓ synced from wiki';el.style.color='#3a8050';}
+  else{el.textContent='⚠ offline — local data';el.style.color='#b88a20';}
+}
+// Merge local (numbers/fallback) with cached wiki abilities → {label,title}[] chips
+function mergedSpecies(sp){
+  const local=SPECIES_DATA[sp]; if(!local)return null;
+  const live=wikiSpeciesCache[sp];
+  const innate = live&&live.innate.length ? live.innate.map(a=>({label:a.name,title:a.desc}))
+                                          : local.innate.map(s=>({label:s,title:''}));
+  // Merge variants case-insensitively (local is Title Case, wiki is ALL CAPS).
+  const titleCase=s=>s.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase()).replace(/'(\w)/g,(m,c)=>"'"+c.toUpperCase());
+  const vmap=new Map(); // lowerkey -> {display, abilities}
+  Object.entries(local.variants).forEach(([n,arr])=>{
+    vmap.set(n.toLowerCase(),{display:n,abilities:arr.map(s=>({label:s,title:''}))});
+  });
+  if(live)Object.entries(live.variants).forEach(([n,arr])=>{
+    const k=n.toLowerCase(),ex=vmap.get(k);
+    vmap.set(k,{display:ex?ex.display:titleCase(n),
+      abilities:(arr&&arr.length)?arr.map(a=>({label:a.name,title:a.desc})):(ex?ex.abilities:[])});
+  });
+  const variants={};
+  vmap.forEach(v=>{variants[v.display]=v.abilities;});
+  return {family:local.family,bonus:local.bonus,note:local.note,innate,variants,url:(live&&live.url)||wikiPageUrl(sp)};
+}
+function renderSpecies(){
   const sp=document.getElementById('f-species').value;
   const box=document.getElementById('species-box');
   const varSel=document.getElementById('f-variant');
-  // rebuild variant options
+  const prevVariant=varSel.value;
   varSel.innerHTML='<option value="">&mdash;</option>';
-  if(!sp||!SPECIES_DATA[sp]){box.classList.remove('visible');renderSpeciesAbilities();calcAll();autosave();return;}
-  const d=SPECIES_DATA[sp];
-  Object.keys(d.variants).forEach(v=>{
-    const o=document.createElement('option');o.value=v;o.textContent=v;varSel.appendChild(o);
-  });
+  const wikiLink=document.getElementById('sp-wiki');
+  if(!sp||!SPECIES_DATA[sp]){box.classList.remove('visible');wikiLink.style.display='none';renderSpeciesAbilities();return;}
+  const d=mergedSpecies(sp);
+  Object.keys(d.variants).forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;varSel.appendChild(o);});
+  if(prevVariant&&d.variants[prevVariant])varSel.value=prevVariant;
   box.classList.add('visible');
   document.getElementById('sp-family').textContent=d.family;
   document.getElementById('sp-note').textContent=d.note?('— '+d.note):'';
-  // bonus tags
+  wikiLink.href=d.url; wikiLink.style.display='inline';
   const bt=document.getElementById('sp-bonus-tags');bt.innerHTML='';
   const labels={'a-phy':'PHY','a-dex':'DEX','a-end':'END','a-ap':'AP','a-wis':'WIS','a-con':'CON','a-int':'INT'};
   if(Object.keys(d.bonus).length){
-    Object.entries(d.bonus).forEach(([id,v])=>{
-      const s=document.createElement('span');s.className='sbtag';s.innerHTML=`${labels[id]} <b>+${v}</b>`;bt.appendChild(s);
-    });
-  }else{
-    const s=document.createElement('span');s.className='sbtag';s.textContent='No fixed attribute bonus';bt.appendChild(s);
-  }
-  // innate abilities chips
+    Object.entries(d.bonus).forEach(([id,v])=>{const s=document.createElement('span');s.className='sbtag';s.innerHTML=`${labels[id]} <b>+${v}</b>`;bt.appendChild(s);});
+  }else{const s=document.createElement('span');s.className='sbtag';s.textContent='No fixed attribute bonus';bt.appendChild(s);}
   const innate=document.getElementById('sp-innate');innate.innerHTML='';
-  d.innate.forEach(a=>{const c=document.createElement('span');c.className='ability-chip';c.textContent=a;innate.appendChild(c);});
-  // auto-fill incept prompts
+  d.innate.forEach(a=>{const c=document.createElement('span');c.className='ability-chip';c.textContent=a.label;if(a.title)c.title=a.title;innate.appendChild(c);});
+  renderActionChipsFromText(d.innate.map(a=>a.title).filter(Boolean).join('  '),'sp-innate-actions',sp+' (innate)');
   const natEl=document.getElementById('i-nature');
-  if(!natEl.value || natEl.dataset.auto==='1'){ natEl.value=`${sp} (${d.family})`; natEl.dataset.auto='1'; }
+  if(!natEl.value||natEl.dataset.auto==='1'){natEl.value=`${sp} (${d.family})`;natEl.dataset.auto='1';}
   const abEl=document.getElementById('i-ability');
-  if(!abEl.value || abEl.dataset.auto==='1'){ abEl.value=d.innate.join('; '); abEl.dataset.auto='1'; }
+  if(!abEl.value||abEl.dataset.auto==='1'){abEl.value=d.innate.map(a=>a.label).join('; ');abEl.dataset.auto='1';}
   renderSpeciesAbilities();
-  calcAll(); autosave();
+}
+function onSpeciesChange(){
+  renderSpecies(); calcAll(); autosave();
+  const sp=document.getElementById('f-species').value;
+  if(sp&&SPECIES_DATA[sp]&&!wikiSpeciesCache[sp]){
+    setSpeciesSync('loading');
+    fetchSpeciesWiki(sp)
+      .then(()=>{ if(document.getElementById('f-species').value===sp){renderSpecies();setSpeciesSync('synced');autosave();} })
+      .catch(()=>{ if(document.getElementById('f-species').value===sp)setSpeciesSync('offline'); });
+  }else if(sp&&wikiSpeciesCache[sp]){ setSpeciesSync('synced'); }
+  else setSpeciesSync('');
 }
 function onVariantChange(){
-  document.getElementById('i-ability').dataset.auto='1'; // allow re-fill
+  document.getElementById('i-ability').dataset.auto='1';
   renderSpeciesAbilities();
-  // append variant abilities into the species ability prompt if auto
-  const sp=document.getElementById('f-species').value;
-  const v=document.getElementById('f-variant').value;
-  const abEl=document.getElementById('i-ability');
-  if(SPECIES_DATA[sp]){
-    const base=SPECIES_DATA[sp].innate.join('; ');
-    const va=(v&&SPECIES_DATA[sp].variants[v])?(' || '+v+': '+SPECIES_DATA[sp].variants[v].join('; ')):'';
-    if(abEl.dataset.auto==='1') abEl.value=base+va;
+  const sp=document.getElementById('f-species').value,v=document.getElementById('f-variant').value;
+  const d=mergedSpecies(sp),abEl=document.getElementById('i-ability');
+  if(d&&abEl.dataset.auto==='1'){
+    const base=d.innate.map(a=>a.label).join('; ');
+    const va=(v&&d.variants[v]&&d.variants[v].length)?(' || '+v+': '+d.variants[v].map(a=>a.label).join('; ')):'';
+    abEl.value=base+va;
   }
   autosave();
 }
 function renderSpeciesAbilities(){
-  const sp=document.getElementById('f-species').value;
-  const v=document.getElementById('f-variant').value;
-  const lbl=document.getElementById('sp-variant-lbl');
-  const box=document.getElementById('sp-variant-abilities');box.innerHTML='';
-  if(sp&&v&&SPECIES_DATA[sp]&&SPECIES_DATA[sp].variants[v]){
-    lbl.style.display='block';lbl.firstChild.textContent='';
-    lbl.innerHTML='Variant Abilities &mdash; '+v;
-    SPECIES_DATA[sp].variants[v].forEach(a=>{const c=document.createElement('span');c.className='ability-chip variant';c.textContent=a;box.appendChild(c);});
-  }else{ lbl.style.display='none'; }
+  const sp=document.getElementById('f-species').value,v=document.getElementById('f-variant').value;
+  const lbl=document.getElementById('sp-variant-lbl'),box=document.getElementById('sp-variant-abilities');
+  box.innerHTML='';
+  const d=sp?mergedSpecies(sp):null;
+  if(d&&v&&d.variants[v]&&d.variants[v].length){
+    lbl.style.display='block'; lbl.innerHTML='Variant Abilities &mdash; '+v;
+    d.variants[v].forEach(a=>{const c=document.createElement('span');c.className='ability-chip variant';c.textContent=a.label;if(a.title)c.title=a.title;box.appendChild(c);});
+    renderActionChipsFromText(d.variants[v].map(a=>a.title).filter(Boolean).join('  '),'sp-variant-actions',v);
+  }else{ lbl.style.display='none'; renderActions('sp-variant-actions',[]); }
 }
 function getSpeciesBonus(){
   const sp=document.getElementById('f-species').value;
   return (sp&&SPECIES_DATA[sp])?SPECIES_DATA[sp].bonus:{};
+}
+
+// ── SMART GENUS — scraped from the 5 domain pages, gated by paradigm ──
+const GENUS_DOMAINS=['Neutral','Eldritch','Elemental','Null','Kinetic'];
+const genusCache={};   // domain -> [{name,domain,ss,ssText,activation,classification,effect}]
+const genusByName={};  // lowercase name -> genus
+function genusStatCells(chunk){
+  const tb=(chunk.match(/\{\|[\s\S]*?\|\}/)||[])[0]; if(!tb)return [];
+  const cells=[]; let started=false;
+  for(const raw of tb.split('\n')){
+    const t=raw.trim();
+    if(t.startsWith('|-')){ if(started)break; started=true; continue; }
+    if(!started||t.startsWith('!')||t==='|}'||t.startsWith('{|'))continue;
+    if(t.startsWith('|')) t.split('||').forEach(part=>{
+      let s=part.trim().replace(/^\|/,'').trim();
+      const j=s.indexOf('|'); if(j>=0&&s.slice(0,j).includes('='))s=s.slice(j+1);
+      cells.push(cleanWiki(s.trim()));
+    });
+  }
+  return cells;
+}
+function parseGenusPage(wt,domain){
+  const out=[];
+  const nameRe=/<div style="font-size:15px;font-weight:700;color:#dedede[^"]*">([^<]+)<\/div>/g;
+  const marks=[]; let m;
+  while((m=nameRe.exec(wt)))marks.push({name:cleanWiki(m[1]),idx:m.index});
+  marks.forEach((mk,i)=>{
+    const chunk=wt.slice(mk.idx, i+1<marks.length?marks[i+1].idx:wt.length);
+    const cells=genusStatCells(chunk);
+    const eff=chunk.match(/<div style="color:#909090;font-size:11px;line-height:1\.7[^"]*">([\s\S]*?)<\/div>/);
+    out.push({name:mk.name,domain,classification:cells[0]||'',ss:parseInt(cells[1])||0,ssText:cells[1]||'',activation:cells[2]||'',effect:eff?cleanWiki(eff[1]):''});
+  });
+  return out;
+}
+async function fetchGenusDomain(domain){
+  if(genusCache[domain])return genusCache[domain];
+  const url=WIKI_BASE+'/api.php?action=parse&prop=wikitext&format=json&origin=*&page='+encodeURIComponent(domain+'_Genus');
+  const r=await fetch(url); if(!r.ok)throw new Error('HTTP '+r.status);
+  const j=await r.json(); if(j.error)throw new Error(j.error.info||'wiki error');
+  const list=parseGenusPage(j.parse.wikitext['*'],domain);
+  genusCache[domain]=list; list.forEach(g=>{genusByName[g.name.toLowerCase()]=g;});
+  return list;
+}
+function paradigmDomains(){
+  const p=document.getElementById('f-paradigm').value;
+  return (p&&PARADIGM_DATA[p])?PARADIGM_DATA[p].domains.slice():GENUS_DOMAINS.slice();
+}
+let _genusLoading=false;
+async function loadGenusForParadigm(){
+  if(_genusLoading)return; _genusLoading=true;
+  const doms=paradigmDomains();
+  const note=document.getElementById('genus-domain-note');
+  if(doms.some(d=>!genusCache[d])&&note)note.textContent='Loading Genus for '+doms.join(', ')+'…';
+  let ok=0;
+  await Promise.all(doms.map(d=>fetchGenusDomain(d).then(()=>ok++).catch(()=>{})));
+  _genusLoading=false;
+  renderGenusDatalist();
+  if(note){
+    const total=doms.reduce((n,d)=>n+((genusCache[d]||[]).length),0);
+    note.textContent= total
+      ? `Genus suggestions limited to your domains: ${doms.join(', ')} · ${total} available (from wiki)`
+      : `Offline — type Genus names manually (domains: ${doms.join(', ')})`;
+  }
+}
+function renderGenusDatalist(){
+  const dl=document.getElementById('genus-options'); if(!dl)return;
+  const opts=[];
+  paradigmDomains().forEach(d=>(genusCache[d]||[]).forEach(g=>opts.push(`<option value="${(g.name||'').replace(/"/g,'&quot;')}">${g.domain} · ${g.ss} SS</option>`)));
+  dl.innerHTML=opts.join('');
+}
+function onGenusPick(n){
+  const nameEl=document.getElementById('gn-name-'+n); if(!nameEl)return;
+  const g=genusByName[(nameEl.value||'').trim().toLowerCase()];
+  if(!g)return; // unknown / freeform — leave as typed
+  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.value=v;};
+  set('gn-dom-'+n,g.domain); set('gn-ss-'+n,g.ss); set('gn-act-'+n,g.activation); set('gn-fx-'+n,g.effect);
+  renderActionChips('gn-fx-'+n,'gn-chips-'+n,'gn-name-'+n);
+  autosave();
+}
+
+// ── CIPHERS — scraped per paradigm; Curator can deactivate Online ciphers ──
+const cipherCache={};   // paradigm -> [cipher]
+const cipherByName={};  // lowercase name -> cipher
+function parseCipherPage(wt,paradigm){
+  const onlineIdx=wt.indexOf('ONLINE CIPHERS'), specialIdx=wt.indexOf('SPECIAL CIPHERS');
+  const sectionAt=(idx)=>{ if(specialIdx>=0&&idx>specialIdx)return 'Special'; if(onlineIdx>=0&&idx>onlineIdx)return 'Online'; return 'Offline'; };
+  const out=[];
+  const nameRe=/<div style="font-size:10\.5px;font-weight:700;color:#dedede[^"]*">([^<]+)<\/div>/g;
+  const marks=[]; let m;
+  while((m=nameRe.exec(wt)))marks.push({name:cleanWiki(m[1]),idx:m.index});
+  marks.forEach((mk,i)=>{
+    const chunk=wt.slice(mk.idx,i+1<marks.length?marks[i+1].idx:wt.length);
+    const meta=(label)=>{ const mm=chunk.match(new RegExp(label+':\\s*<span[^>]*>([^<]+)</span>','i')); return mm?cleanWiki(mm[1]):''; };
+    const effs=[...chunk.matchAll(/<div style="color:#909090;font-size:11px;line-height:1\.7[^"]*">([\s\S]*?)<\/div>/g)].map(x=>cleanWiki(x[1]));
+    out.push({name:mk.name,paradigm,section:sectionAt(mk.idx),ss:parseInt(meta('SS'))||0,type:meta('TYPE'),rank:meta('RANK'),effect:effs.join(' ')});
+  });
+  return out;
+}
+async function fetchCipherPage(paradigm){
+  if(cipherCache[paradigm])return cipherCache[paradigm];
+  const url=WIKI_BASE+'/api.php?action=parse&prop=wikitext&format=json&origin=*&page='+encodeURIComponent(paradigm+'_Ciphers');
+  const r=await fetch(url); if(!r.ok)throw new Error('HTTP '+r.status);
+  const j=await r.json(); if(j.error)throw new Error(j.error.info||'wiki error');
+  const list=parseCipherPage(j.parse.wikitext['*'],paradigm);
+  cipherCache[paradigm]=list; list.forEach(c=>{cipherByName[c.name.toLowerCase()]=c;});
+  return list;
+}
+let _cipherLoading=false;
+async function loadCiphersForParadigm(){
+  const p=document.getElementById('f-paradigm').value;
+  const note=document.getElementById('cipher-domain-note');
+  if(!p){ if(note)note.textContent='Pick a Paradigm to load its Ciphers.'; return; }
+  if(_cipherLoading)return; _cipherLoading=true;
+  if(!cipherCache[p]&&note)note.textContent='Loading '+p+' Ciphers…';
+  try{ await fetchCipherPage(p); }catch(e){}
+  _cipherLoading=false;
+  renderCipherDatalist();
+  if(note){
+    const list=cipherCache[p]||[];
+    const n=s=>list.filter(c=>c.section===s).length;
+    note.textContent= list.length ? `${p} Ciphers · ${list.length} (Offline ${n('Offline')} · Online ${n('Online')} · Special ${n('Special')})` : 'Offline — enter cipher details manually';
+  }
+}
+function renderCipherDatalist(){
+  const dl=document.getElementById('cipher-options'); if(!dl)return;
+  const list=cipherCache[document.getElementById('f-paradigm').value]||[];
+  dl.innerHTML=list.map(c=>`<option value="${(c.name||'').replace(/"/g,'&quot;')}">${c.section} · ${c.ss} SS</option>`).join('');
+}
+function onCipherPick(){
+  const el=document.getElementById('c-pick'); if(!el)return;
+  const c=cipherByName[(el.value||'').trim().toLowerCase()];
+  if(!c)return;
+  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.value=v;};
+  set('c-benefits', c.name+' — '+c.effect);
+  set('c-type', c.section==='Online'?'Online':'Offline');
+  set('c-tl', c.section==='Online'?3:2);
+  renderActionChipsFromText(c.effect,'cipher-chips',c.name);
+  applyOnlineCipherState(); autosave();
+}
+let onlineCiphersOff=false, _cipherForcedOff=false;
+function applyOnlineCipherState(){
+  const ct=document.getElementById('c-type'); if(!ct)return;
+  const myOnline=ct.value==='Online';
+  const blocked=onlineCiphersOff&&myOnline;
+  const banner=document.getElementById('cipher-block-note'); if(banner)banner.style.display=blocked?'block':'none';
+  ['cs-active','cs-suspended','cs-deactivated'].forEach(id=>{const b=document.getElementById(id);if(b)b.disabled=blocked;});
+  document.querySelectorAll('#cipher-chips .act-chip').forEach(b=>{b.disabled=blocked;b.style.opacity=blocked?'0.3':'';b.style.cursor=blocked?'not-allowed':'';});
+  if(blocked){ if(cipherStatus!=='deactivated'){_cipherForcedOff=true;setCipherStatus('deactivated');} }
+  else if(_cipherForcedOff){ _cipherForcedOff=false; setCipherStatus('active'); }
+}
+function updateCipherToggleBtn(){
+  const b=document.getElementById('tp-cipher-toggle'); if(!b)return;
+  b.textContent=onlineCiphersOff?'Reactivate Online Ciphers':'Deactivate Online Ciphers';
+  b.className='tp-btn'+(onlineCiphersOff?'':' ghost');
 }
 
 // ════════════════════════════════════════════════════
@@ -1038,14 +1422,28 @@ function onParadigmChange(){
   document.getElementById('pi-domains').textContent=d.domains.join(', ');
   document.getElementById('wpn-hint').textContent=
     `${p} Paradigm — Light: ${d.weapons.Light} · Medium: ${d.weapons.Medium} · Heavy: ${d.weapons.Heavy}`;
+  const pl=document.getElementById('pi-wiki'); if(pl)pl.href=wikiPageUrl(p);
+  loadGenusForParadigm(); loadCiphersForParadigm();
   calcAll(); autosave();
 }
-function onBackgroundChange(){
+function onBackgroundChange(autoAssign){
+  if(autoAssign===undefined)autoAssign=true;
   const bg=document.getElementById('f-background').value;
   const box=document.getElementById('bg-bonus-box');
-  if(!bg){box.classList.remove('visible');return;}
+  if(!bg){box.classList.remove('visible');hideBgMechanic();return;}
   box.classList.add('visible');
   renderBgBonuses();
+  loadBackgroundData().then(()=>{
+    const d=BACKGROUND_DATA&&BACKGROUND_DATA[bg];
+    if(!d){hideBgMechanic();return;}
+    if(autoAssign){ // user picked this background — auto-fill its bonus stats (flat +2/+2/+1/+1)
+      document.getElementById('bg-type').value='standard';
+      renderBgBonuses();
+      d.bonuses.forEach((b,i)=>{ const sel=document.getElementById('bg-b'+i); if(sel&&b.id)sel.value=b.id; });
+      calcAll(); autosave();
+    }
+    showBgMechanic(bg,d);
+  });
 }
 function renderBgBonuses(){
   const type=document.getElementById('bg-type').value;
@@ -1198,6 +1596,7 @@ function calcAll(){
 
   updateRankBar();
   updatePEState();
+  publishCombatantDebounced();
 }
 
 // ════════════════════════════════════════════════════
@@ -1217,12 +1616,19 @@ function setCipherStatus(s){
 // ════════════════════════════════════════════════════
 // PRESSURE ENGINE
 // ════════════════════════════════════════════════════
+function gateAllows(id){
+  if(typeof Table==='undefined'||!Table.connected)return true;
+  const g=Table.gates&&Table.gates[Table.clientId];
+  return !g || g[id]!==false;
+}
 function buildPESkills(){
   const wrap=document.getElementById('pe-skills');wrap.innerHTML='';
+  const specs=SPECS.filter(s=>gateAllows(s[0]));
+  const attrs=ATTRS.filter(a=>gateAllows(a[0]));
   for(let i=1;i<=4;i++){
     const row=document.createElement('div');row.className='pe-skill-row';
-    const spOpts='<option value="">— skill —</option>'+SPECS.map(s=>`<option value="${s[0]}">${s[1]}</option>`).join('');
-    const atOpts='<option value="">no attr</option>'+ATTRS.map(a=>`<option value="${a[0]}">${a[1]}</option>`).join('');
+    const spOpts='<option value="">— skill —</option>'+specs.map(s=>`<option value="${s[0]}">${s[1]}</option>`).join('');
+    const atOpts='<option value="">no attr</option>'+attrs.map(a=>`<option value="${a[0]}">${a[1]}</option>`).join('');
     row.innerHTML=`<div class="rl">${i}</div>
       <select id="pe-sp-${i}" onchange="autosave()">${spOpts}</select>
       <select id="pe-at-${i}" onchange="autosave()">${atOpts}</select>
@@ -1267,10 +1673,16 @@ function resolvePE(){
   document.getElementById('pe-aav').textContent=aav+(cBonus?` (+${cBonus})`:'');
   document.getElementById('pe-diff').textContent=(diff>=0?'+':'')+diff;
   const band=peBand(diff);
+  const connected=(typeof Table!=='undefined'&&Table.connected);
+  const isAntag=(connected&&Table.role==='curator'); // boss/NPC: success raises pressure
+  const finalDelta=isAntag?-band.change:band.change;
   const o=document.getElementById('pe-outcome');
   o.textContent=band.name; o.style.color=band.color;
-  document.getElementById('pe-change').textContent=(band.change>=0?'+':'')+band.change+'  ('+band.range+')';
-  res.dataset.change=band.change;
+  document.getElementById('pe-change').textContent= connected
+    ? ((finalDelta>=0?'+':'')+finalDelta+' → shared BP'+(isAntag?' (antagonist)':''))
+    : ((band.change>=0?'+':'')+band.change+'  ('+band.range+')');
+  res.dataset.change=finalDelta;
+  res.dataset.outcome=band.name;
   res.classList.add('show');
   toast(band.name);
 }
@@ -1286,10 +1698,19 @@ function peBand(diff){
 function applyPEChange(){
   const res=document.getElementById('pe-result');
   const ch=parseInt(res.dataset.change)||0;
+  if(typeof Table!=='undefined'&&Table.connected){
+    // contribute to the ONE shared BP; the state/bp listener updates everyone's value
+    Table.applyPEDelta(ch);
+    Table.log(`${Table.name}${Table.role==='curator'?' (antagonist)':''}: ${res.dataset.outcome||'resolved'} → BP ${ch>=0?'+':''}${ch}`);
+    res.classList.remove('show');
+    toast('Shared BP '+(ch>=0?'+':'')+ch);
+    return;
+  }
   const pe=parseInt(document.getElementById('pe-val').value)||0;
-  document.getElementById('pe-val').value=Math.max(0,pe+ch);
+  const nv=Math.max(0,pe+ch);
+  document.getElementById('pe-val').value=nv;
   updatePEState(); res.classList.remove('show'); autosave();
-  toast('PE → '+document.getElementById('pe-val').value);
+  toast('PE → '+nv);
 }
 function resetPESkills(){
   for(let i=1;i<=4;i++){ document.getElementById('pe-sp-'+i).value=''; document.getElementById('pe-at-'+i).value=''; document.getElementById('pe-r-'+i).textContent='—'; }
@@ -1340,14 +1761,19 @@ function applyAll(d){
   if(d['f-variant']){document.getElementById('f-variant').value=d['f-variant'];renderSpeciesAbilities();}
   if(d.__stage)setStage(d.__stage);
   if(d.__cipher)setCipherStatus(d.__cipher);
-  document.querySelectorAll('[id^="bg-b"]').forEach(el=>{if(d[el.id])el.value=d[el.id];});
-  onParadigmChange(); onBackgroundChange(); calcAll(); updateGenusBtn(); updateCipherBtn(); updatePEState();
+  // create paradigm/background sub-controls FIRST, then restore the bg-bonus selects
+  onParadigmChange(); onBackgroundChange();
+  document.querySelectorAll('[id^="bg-b"]').forEach(el=>{if(d[el.id]!==undefined)el.value=d[el.id];});
+  calcAll(); updateGenusBtn(); updateCipherBtn(); updatePEState(); refreshAllActionChips();
+  // pull live cipher/genus data for this paradigm so pickers work after an old-file load
+  if(d['f-paradigm']){loadGenusForParadigm();loadCiphersForParadigm();}
 }
 function autosave(){localStorage.setItem('wte-sheet-v6',JSON.stringify(collectAll()));}
 document.addEventListener('change',autosave);
 document.addEventListener('input',e=>{
   if(e.target.classList.contains('spec-in')||e.target.id.startsWith('a-')||e.target.id.startsWith('do-'))calcAll();
   autosave();
+  publishCombatantDebounced();
 });
 
 function saveSheet(){
@@ -1429,15 +1855,22 @@ function showLock(name){
 }
 // Attribute check: 1d20 + score (re-reads current score each roll)
 function inlineRoll(label,scoreId){
+  if(!gateAllows(scoreId)){toast('Curator restricted this roll');return;}
   lockedRoll={kind:'attr',label,scoreId,sides:20};
   openPanelIfClosed(); showLock(label);
   runLockedRoll();
 }
 // Specialty check: 1d40 + pts; pts<=25 → -25 untrained penalty (re-reads current pts)
 function inlineSpecRoll(label,specId){
+  if(!gateAllows(specId)){toast('Curator restricted this roll');return;}
   lockedRoll={kind:'spec',label,specId,sides:40};
   openPanelIfClosed(); showLock(label);
   runLockedRoll();
+}
+function inlineDiceRoll(label,expr){
+  const p=parseExpr(expr); if(!p){toast('Bad dice: '+expr);return;}
+  lockedRoll={kind:'dice',label,expr};
+  openPanelIfClosed(); showLock(label); runLockedRoll();
 }
 function runLockedRoll(){
   if(!lockedRoll)return;
@@ -1450,6 +1883,9 @@ function runLockedRoll(){
     const mod=pts+penalty;
     const note=`${lockedRoll.label}: 1d40 + ${pts}${penalty?(' '+penalty+' untrained'):''}`;
     performRoll(1,40,mod,`1d40${mod>=0?'+'+mod:mod}`,note);
+  }else if(lockedRoll.kind==='dice'){
+    const p=parseExpr(lockedRoll.expr);
+    performRoll(p.count,p.sides,p.mod,lockedRoll.expr,lockedRoll.label);
   }
 }
 function performRoll(count,sides,mod,exprLabel,note){
@@ -1465,6 +1901,8 @@ function performRoll(count,sides,mod,exprLabel,note){
   rollHistory.unshift({expr:(note?note.split(':')[0]+' ':'')+exprLabel.replace('+0',''),total,t});
   if(rollHistory.length>25)rollHistory.pop();
   renderHistory();
+  window.__lastRollResult={total,rolls,mod};
+  if(Table.connected)Table.postRoll(note||exprLabel.replace('+0',''),total);
 }
 function renderHistory(){
   const el=document.getElementById('dHistory');el.innerHTML='';
@@ -1480,6 +1918,84 @@ function clearHistory(){
   document.getElementById('dResultBreak').textContent='';
   document.getElementById('dResultExpr').textContent='';
   document.getElementById('lastRollNote').textContent='';
+}
+
+// ════════════════════════════════════════════════════
+// SMART EFFECT ACTIONS — read effect text → roll buttons
+// ════════════════════════════════════════════════════
+const ATTR_VOCAB={strength:'a-phy',dexterity:'a-dex',endurance:'a-end','action priority':'a-ap',wisdom:'a-wis',charisma:'a-con',intelligence:'a-int',phy:'a-phy',dex:'a-dex',end:'a-end',ap:'a-ap',wis:'a-wis',con:'a-con',int:'a-int'};
+const SPEC_VOCAB={inspiration:'s-ins',versatility:'s-ver',balance:'s-bal',weight:'s-wt',precision:'s-pre',control:'s-ctrl',priority:'s-pri','weapon mastery':'s-wm','mental fortitude':'s-mf',perception:'s-per',adaptation:'s-adp',adaption:'s-adp',cunning:'s-cun'};
+const ATTR_CODE={'a-phy':'PHY','a-dex':'DEX','a-end':'END','a-ap':'AP','a-wis':'WIS','a-con':'CON','a-int':'INT'};
+function specLabel(id){const f=SPECS.find(s=>s[0]===id);return f?f[1]:id;}
+// Parse free-text effect → [{label, kind:'attr'|'spec'|'dice', stat?/expr?}]
+function parseEffectActions(text){
+  if(!text)return[];
+  const actions=[],seen=new Set();
+  const vocab=[];
+  Object.entries(SPEC_VOCAB).forEach(([k,v])=>vocab.push([k,'spec',v]));
+  Object.entries(ATTR_VOCAB).forEach(([k,v])=>vocab.push([k,'attr',v]));
+  vocab.sort((a,b)=>b[0].length-a[0].length); // multiword terms first
+  const alt=vocab.map(v=>v[0].replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|');
+  const re=new RegExp('\\b('+alt+')\\b[\\s-]*(?:based\\s+)?(skill check|check|saving throw|save|roll)','gi');
+  let m;
+  while((m=re.exec(text))){
+    const v=vocab.find(x=>x[0]===m[1].toLowerCase()); if(!v)continue;
+    const w=m[2].toLowerCase();
+    const ck=/sav/.test(w)?'Save':(w==='roll'?'Roll':'Check');
+    const code=v[1]==='attr'?ATTR_CODE[v[2]]:specLabel(v[2]);
+    const key=v[2]+'|'+ck; if(seen.has(key))continue; seen.add(key);
+    actions.push({label:code+' '+ck,kind:v[1],stat:v[2]});
+  }
+  const dre=/\b(\d*)d(\d+)([+-]\d+)?\b/gi;
+  while((m=dre.exec(text))){
+    const expr=(m[1]||'1')+'d'+m[2]+(m[3]||'');
+    if(seen.has('dice|'+expr))continue; seen.add('dice|'+expr);
+    actions.push({label:expr,kind:'dice',expr});
+  }
+  return actions;
+}
+function fireAction(a){
+  if(a.kind==='attr')inlineRoll(a.label,a.stat);
+  else if(a.kind==='spec')inlineSpecRoll(a.label,a.stat);
+  else if(a.kind==='dice')inlineDiceRoll(a.label,a.expr);
+}
+function renderActions(containerId,actions,prefix,sourceLabel){
+  const el=document.getElementById(containerId); if(!el)return;
+  el.innerHTML='';
+  if(!actions||!actions.length)return;
+  if(prefix){const s=document.createElement('span');s.className='act-chips-lbl';s.textContent=prefix;el.appendChild(s);}
+  actions.forEach(a=>{
+    const b=document.createElement('button');b.type='button';b.className='act-chip';
+    b.textContent=a.label; b.title='Roll '+a.label;
+    b.addEventListener('click',()=>fireAction(a));
+    el.appendChild(b);
+  });
+  if(Table.connected&&sourceLabel){
+    const sb=document.createElement('button');sb.type='button';sb.className='act-send';sb.textContent='▸ Use on…';
+    sb.title='Send these checks to a target at the table';
+    sb.addEventListener('click',ev=>showTargetMenu(ev,sourceLabel,actions));
+    el.appendChild(sb);
+  }
+}
+function renderActionChips(srcId,containerId,labelId){
+  const src=document.getElementById(srcId);
+  const label=labelId?(document.getElementById(labelId)?.value||'Ability'):'Ability';
+  renderActions(containerId,parseEffectActions(src?src.value:''),'Rolls',label);
+}
+function renderActionChipsFromText(text,containerId,sourceLabel){
+  renderActions(containerId,parseEffectActions(text),'Rolls',sourceLabel||'Ability');
+}
+function renderWeaponChips(i){
+  const dmg=document.getElementById('w'+i+'-dmg'),name=document.getElementById('w'+i+'-name');
+  const acts=[];
+  parseEffectActions(dmg?dmg.value:'').filter(a=>a.kind==='dice')
+    .forEach(a=>acts.push({label:'Damage '+a.expr,kind:'dice',expr:a.expr}));
+  if(name&&name.value.trim())acts.push({label:'Attack (Wpn Mastery)',kind:'spec',stat:'s-wm'});
+  renderActions('wpn-chips-'+i,acts,acts.length?'Rolls':'',(name&&name.value.trim())||('Weapon '+i));
+}
+function refreshAllActionChips(){
+  for(let i=1;i<=genusCount;i++){ if(document.getElementById('gn-fx-'+i))renderActionChips('gn-fx-'+i,'gn-chips-'+i); }
+  for(let i=1;i<=4;i++)renderWeaponChips(i);
 }
 
 // ════════════════════════════════════════════════════
@@ -1660,6 +2176,407 @@ function fallbackText(txt){
 document.getElementById('exportModal').addEventListener('click',e=>{if(e.target.id==='exportModal')closeExport();});
 
 // ════════════════════════════════════════════════════
+// WIKI ↔ CHARACTER — import a character authored on a wiki page
+// ════════════════════════════════════════════════════
+const META_FIELDS=[['name','f-name'],['player','f-player'],['rank','f-level'],['paradigm','f-paradigm'],['species','f-species'],['variant','f-variant'],['background','f-background'],['cas','f-cas'],['family','f-family'],['session','f-session'],['notes','notes']];
+const STAT_LABELS=[
+  ['PHY','a-phy'],['DEX','a-dex'],['END','a-end'],['AP','a-ap'],['WIS','a-wis'],['CON','a-con'],['INT','a-int'],
+  ['Inspiration','s-ins'],['Versatility','s-ver'],['Balance','s-bal'],['Weight','s-wt'],['Precision','s-pre'],
+  ['Control','s-ctrl'],['Priority','s-pri'],['Weapon Mastery','s-wm'],['Mental Fortitude','s-mf'],
+  ['Perception','s-per'],['Adaption','s-adp'],['Cunning','s-cun'] ];
+const LABEL_TO_ID={}; STAT_LABELS.forEach(([l,id])=>LABEL_TO_ID[l.toLowerCase()]=id);
+[['strength','a-phy'],['dexterity','a-dex'],['endurance','a-end'],['action priority','a-ap'],['wisdom','a-wis'],['charisma','a-con'],['intelligence','a-int'],['wpn mastery','s-wm'],['mental fort','s-mf'],['adaptation','s-adp']].forEach(([l,id])=>LABEL_TO_ID[l]=id);
+const ID_TO_LABEL={}; STAT_LABELS.forEach(([l,id])=>ID_TO_LABEL[id]=l);
+
+function buildWikiTemplate(){
+  const L=['<!-- WTE-SHEET'];
+  META_FIELDS.forEach(([lbl,id])=>{ if(id==='notes')return; L.push(lbl+': '+(val(id)||'')); });
+  L.push('background bonus: '+(val('bg-type')||'standard'));
+  ['bg-b0','bg-b1','bg-b2','bg-b3'].forEach((bid,i)=>{ const v=document.getElementById(bid)?.value; if(v)L.push('bonus '+(i+1)+': '+(ID_TO_LABEL[v]||v)); });
+  ATTRS.forEach(a=>L.push(a[1]+': '+(val(a[0])||'0')));
+  SPECS.forEach(s=>L.push((ID_TO_LABEL[s[0]]||s[1])+': '+(val(s[0])||'0')));
+  if(val('notes'))L.push('notes: '+val('notes').replace(/\s*\n\s*/g,' '));
+  L.push('WTE-SHEET -->');
+  return L.join('\n');
+}
+function parseWikiTemplate(text){
+  let block=text;
+  const m=text.match(/WTE-SHEET([\s\S]*?)WTE-SHEET/i);
+  if(m)block=m[1];
+  const jm=block.match(/\{[\s\S]*\}/);
+  if(jm){ try{ const o=JSON.parse(jm[0]); if(o&&typeof o==='object'&&o['f-name']!==undefined)return o; }catch(e){} }
+  const out={};
+  block.split('\n').forEach(line=>{
+    const mm=line.match(/^\s*([^:#<][^:]*?)\s*:\s*(.*)$/); if(!mm)return;
+    const key=mm[1].trim().toLowerCase(), v=mm[2].trim();
+    const meta=META_FIELDS.find(f=>f[0]===key); if(meta){ out[meta[1]]=v; return; }
+    if(key==='background bonus'){ out['bg-type']=/focus/i.test(v)?'focused':'standard'; return; }
+    const bm=key.match(/^bonus\s*([1-4])$/); if(bm){ const id=LABEL_TO_ID[v.toLowerCase()]; if(id)out['bg-b'+(parseInt(bm[1])-1)]=id; return; }
+    const sid=LABEL_TO_ID[key]; if(sid){ out[sid]=v; return; }
+  });
+  return Object.keys(out).length?out:null;
+}
+async function importFromWiki(){
+  const page=document.getElementById('wiki-page-input').value.trim();
+  if(!page){toast('Enter a wiki page name');return;}
+  toast('Fetching '+page+'…');
+  try{
+    const url=WIKI_BASE+'/api.php?action=parse&prop=wikitext&format=json&origin=*&page='+encodeURIComponent(page);
+    const r=await fetch(url); if(!r.ok)throw new Error('HTTP '+r.status);
+    const j=await r.json(); if(j.error)throw new Error(j.error.info||'page not found');
+    const obj=parseWikiTemplate(j.parse.wikitext['*']);
+    if(!obj){toast('No WTE-SHEET block found on that page');return;}
+    applyAll(obj); closeWiki(); toast('Imported '+(obj['f-name']||'character'));
+  }catch(e){ toast('Import failed: '+e.message); }
+}
+function openWiki(){ document.getElementById('wiki-template-out').value=buildWikiTemplate(); document.getElementById('wikiModal').classList.add('open'); }
+function closeWiki(){ document.getElementById('wikiModal').classList.remove('open'); }
+function copyWikiTemplate(){
+  const ta=document.getElementById('wiki-template-out'); ta.select();
+  try{ document.execCommand('copy'); toast('Template copied — paste onto your wiki page'); }catch(e){ if(navigator.clipboard)navigator.clipboard.writeText(ta.value).then(()=>toast('Template copied')); }
+}
+document.getElementById('wikiModal').addEventListener('click',e=>{if(e.target.id==='wikiModal')closeWiki();});
+
+// ════════════════════════════════════════════════════
+// BACKGROUND MECHANICS — scraped from the Background page
+// ════════════════════════════════════════════════════
+let BACKGROUND_DATA=null, bgMechanicActive=false;
+function mapBgStats(text){
+  const parts=(text||'').split(/,|;/).map(s=>s.trim()).filter(Boolean);
+  const keys=Object.keys(LABEL_TO_ID).sort((a,b)=>b.length-a.length);
+  const out=[];
+  parts.forEach((p,idx)=>{
+    const lp=p.toLowerCase(); let id=LABEL_TO_ID[lp];
+    if(!id){ for(const k of keys){ if(lp.includes(k)){ id=LABEL_TO_ID[k]; break; } } }
+    if(!id)return;
+    let amt; if(/\b(two|2)\b/.test(lp))amt=2; else if(/\b(three|3)\b/.test(lp))amt=3; else if(/\b(one|1)\b/.test(lp))amt=1; else amt=[2,2,1,1][idx]!==undefined?[2,2,1,1][idx]:1;
+    out.push({id,amt});
+  });
+  return out;
+}
+function parseBackgroundPage(wt){
+  const tables=wt.match(/\{\|[\s\S]*?\|\}/g)||[];
+  const tbl=tables.find(t=>/Passive Bonus Stats/i.test(t));
+  if(!tbl)return {};
+  const out={};
+  tbl.split(/\n\|-/).forEach(r=>{
+    const cells=[];
+    r.split('\n').forEach(line=>{ const t=line.trim(); if(t.startsWith('|')&&t!=='|}'&&!t.startsWith('|-')&&!t.startsWith('{|'))cells.push(cleanWiki(t.replace(/^\|\s?/,''))); });
+    if(cells.length>=4 && cells[0] && !/passive bonus/i.test(cells[1]||'')) out[cells[0]]={statsText:cells[1],trigger:cells[2],effect:cells[3],bonuses:mapBgStats(cells[1])};
+  });
+  return out;
+}
+async function loadBackgroundData(){
+  if(BACKGROUND_DATA)return BACKGROUND_DATA;
+  try{
+    const j=await (await fetch(WIKI_BASE+'/api.php?action=parse&prop=wikitext&format=json&origin=*&page=Background')).json();
+    BACKGROUND_DATA=parseBackgroundPage(j.parse.wikitext['*']);
+  }catch(e){ BACKGROUND_DATA={}; }
+  return BACKGROUND_DATA;
+}
+function showBgMechanic(bg,d){
+  const box=document.getElementById('bg-mechanic'); if(!box)return;
+  box.style.display='block';
+  document.getElementById('bg-mech-trigger').textContent='Trigger: '+(d.trigger||'—');
+  document.getElementById('bg-mech-effect').textContent='Effect: '+(d.effect||'—');
+  applyBgMechState();
+}
+function hideBgMechanic(){ const b=document.getElementById('bg-mechanic'); if(b)b.style.display='none'; }
+function toggleBgMechanic(){
+  if(typeof Table!=='undefined'&&Table.connected){ toast('At a table the Curator confirms the trigger'); return; }
+  bgMechanicActive=!bgMechanicActive; applyBgMechState(); autosave();
+}
+function applyBgMechState(){
+  let active=bgMechanicActive, byCurator=false;
+  if(typeof Table!=='undefined'&&Table.connected){ active=!!(Table.bgMech&&Table.bgMech[Table.clientId]); byCurator=true; }
+  const st=document.getElementById('bg-mech-status'), btn=document.getElementById('bg-mech-toggle');
+  if(st){ st.textContent=active?'Active':'Inactive'; st.className='bg-mech-status '+(active?'on':'off'); }
+  if(btn){ btn.textContent=active?'Deactivate':'Activate'; btn.disabled=byCurator; btn.title=byCurator?'Curator confirms the trigger at the table':''; }
+}
+
+// ════════════════════════════════════════════════════
+// TABLE — real-time multiplayer (Firebase Realtime DB)
+// ════════════════════════════════════════════════════
+function randCode(){return 'WTE-'+Math.random().toString(36).slice(2,6).toUpperCase();}
+function clientId(){
+  let id=localStorage.getItem('wte-client-id');
+  if(!id){id='c'+Math.random().toString(36).slice(2,10);localStorage.setItem('wte-client-id',id);}
+  return id;
+}
+// lazy-load the Firebase compat SDK only when the Table is actually used
+function loadFirebase(){
+  if(window.firebase&&window.firebase.database)return Promise.resolve();
+  if(window.__fbLoading)return window.__fbLoading;
+  window.__fbLoading=new Promise((res,rej)=>{
+    const add=(src,cb)=>{const s=document.createElement('script');s.src=src;s.onload=cb;s.onerror=()=>rej(new Error('Failed to load '+src));document.head.appendChild(s);};
+    add('https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js',()=>
+      add('https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js',res));
+  });
+  return window.__fbLoading;
+}
+
+const Table={
+  connected:false, room:null, role:'player', name:'', db:null, ref:null, evRef:null,
+  combatants:{}, gates:{}, _startTs:0, _view:null,
+  get clientId(){return clientId();},
+  setBP(v){ if(this.connected&&this.role==='curator')this.ref.child('state/bp').set(parseInt(v)||0); },
+  setGate(id,statId,allowed){ if(this.connected&&this.role==='curator')this.ref.child('gates/'+id+'/'+statId).set(!!allowed); },
+  setAllGate(id,allowed){ if(!(this.connected&&this.role==='curator'))return; const m={}; ATTRS.concat(SPECS).forEach(x=>m[x[0]]=!!allowed); this.ref.child('gates/'+id).set(m); },
+  setOnlineCiphers(off){ if(this.connected&&this.role==='curator'){ this.ref.child('state/onlineCiphersOff').set(!!off); this.log('Curator '+(off?'DEACTIVATED':'reactivated')+' all Online Ciphers'); } },
+  config(){ try{return JSON.parse(localStorage.getItem('wte-fb-config')||'null');}catch(e){return null;} },
+  clearConfig(){ localStorage.removeItem('wte-fb-config'); renderTablePanel(); },
+  async connect(room,role,name){
+    const cfg=this.config(); if(!cfg){toast('Add Firebase config first');return;}
+    if(!room){toast('Enter a room code');return;}
+    try{
+      await loadFirebase();
+      if(!firebase.apps.length)firebase.initializeApp(cfg);
+      this.db=firebase.database();
+    }catch(e){toast('Firebase error: '+e.message);return;}
+    this.room=room.trim().toUpperCase(); this.role=role||'player';
+    this.name=name||val('f-name')||(this.role==='curator'?'Curator':'Player');
+    this.ref=this.db.ref('tables/'+this.room);
+    const mref=this.ref.child('members/'+this.clientId);
+    mref.set({name:this.name,role:this.role,ts:Date.now()});
+    mref.onDisconnect().remove();
+    this.connected=true;
+    this.publishCombatant();
+    this.ref.child('combatants/'+this.clientId).onDisconnect().remove();
+    this.ref.child('combatants').on('value',s=>{this.combatants=s.val()||{};renderRoster();refreshAllActionChips();});
+    this.ref.child('gates').on('value',s=>{this.gates=s.val()||{};applyMyGate();renderGateEditor();});
+    this.ref.child('state/bp').on('value',s=>{
+      const bp=s.val(); if(bp==null)return;
+      const el=document.getElementById('pe-val'); if(el){el.value=bp;updatePEState();}
+      const t=document.getElementById('tp-bp'); if(t&&document.activeElement!==t)t.value=bp;
+    });
+    this.ref.child('state/onlineCiphersOff').on('value',s=>{ onlineCiphersOff=!!s.val(); applyOnlineCipherState(); updateCipherToggleBtn(); });
+    const pv=document.getElementById('pe-val'); if(pv)pv.disabled=(this.role!=='curator');
+    this._startTs=Date.now();
+    this.evRef=this.ref.child('events');
+    this.evRef.on('child_added',s=>this.onEvent(s.val()));
+    renderTablePanel(); refreshAllActionChips();
+    toast('Joined table '+this.room);
+  },
+  leave(){
+    try{
+      if(this.ref){
+        this.ref.child('combatants').off(); this.ref.child('gates').off(); this.ref.child('state/bp').off(); this.ref.child('state/onlineCiphersOff').off();
+        if(this.evRef)this.evRef.off();
+        this.ref.child('members/'+this.clientId).remove();
+        this.ref.child('combatants/'+this.clientId).remove();
+      }
+    }catch(e){}
+    this.connected=false; this.ref=null; this.evRef=null; this.combatants={}; this.gates={};
+    onlineCiphersOff=false; applyOnlineCipherState();
+    const pv=document.getElementById('pe-val'); if(pv)pv.disabled=false;
+    closeGateEditor(); applyMyGate();
+    renderTablePanel(); refreshAllActionChips();
+  },
+  publishCombatant(){
+    if(!this.connected||!this.ref)return;
+    this.ref.child('combatants/'+this.clientId).set({
+      name:val('f-name')||this.name, ownerId:this.clientId, ownerName:this.name, role:this.role,
+      species:val('f-species'), variant:val('f-variant'),
+      hpMax:getV('d-hpmax'), hpCur:getV('d-hpcur'), dhp:getV('d-dhpcur'), ss:getV('d-sscur'),
+      ts:Date.now()
+    });
+  },
+  sendAction(ability,actions,targetId){
+    if(!this.connected)return;
+    const t=this.combatants[targetId]; if(!t)return;
+    this.evRef.push({type:'action',fromId:this.clientId,fromName:this.name,ability,prompts:actions,targetId,targetName:t.name||'?',ts:Date.now()});
+  },
+  postRoll(label,total){
+    if(!this.connected||!this.evRef)return;
+    this.evRef.push({type:'roll',fromId:this.clientId,fromName:this.name,label,total,ts:Date.now()});
+  },
+  // Any connected client contributes to the ONE shared BP, atomically.
+  applyPEDelta(delta){
+    if(!this.connected)return;
+    const base=parseInt(document.getElementById('pe-val').value)||0;
+    this.ref.child('state/bp').transaction(cur=>Math.max(0,(typeof cur==='number'?cur:base)+delta));
+  },
+  log(text){ if(this.connected&&this.evRef)this.evRef.push({type:'log',text,ts:Date.now()}); },
+  onEvent(e){
+    if(!e||(e.ts&&e.ts<this._startTs))return; // ignore historical backlog
+    if(e.type==='action'){
+      addLogLine(`<b>${esc(e.fromName)}</b> used <b>${esc(e.ability)}</b> on ${esc(e.targetName)}`);
+      if(e.targetId===this.clientId)showPrompt(e);
+    }else if(e.type==='roll'){
+      addLogLine(`${esc(e.fromName)} rolled ${esc(e.label)}: <b>${esc(String(e.total))}</b>`);
+    }else if(e.type==='log'){
+      addLogLine(esc(e.text));
+    }
+  }
+};
+
+let _pubTimer=null;
+function publishCombatantDebounced(){
+  if(!Table.connected)return;
+  clearTimeout(_pubTimer); _pubTimer=setTimeout(()=>Table.publishCombatant(),300);
+}
+function toggleTable(){
+  const p=document.getElementById('tablePanel');
+  p.classList.toggle('open');
+  if(p.classList.contains('open'))renderTablePanel();
+}
+function renderTablePanel(){
+  const b=document.getElementById('tableBody'); if(!b)return;
+  const cfg=Table.config();
+  const view=!cfg?'setup':(Table.connected?'connected':'connect');
+  if(view===Table._view && view==='connected'){ renderRoster(); return; }
+  Table._view=view;
+  if(view==='setup'){
+    b.innerHTML=`<div class="tp-setup">
+      <div class="tp-note">Paste your Firebase web config (Firebase Console &rarr; Project settings &rarr; Your apps &rarr; Web). Must include <b>databaseURL</b> &amp; <b>apiKey</b>. <a href="https://console.firebase.google.com" target="_blank" rel="noopener">Open console &#8599;</a></div>
+      <div class="tp-field"><label>Firebase config</label><textarea id="fb-config-input" placeholder='{ "apiKey":"...", "databaseURL":"https://...firebasedatabase.app", "projectId":"..." }'></textarea></div>
+      <button class="tp-btn" onclick="tableSaveConfig()">Save config</button>
+      <div class="tp-note" style="margin-top:8px;color:#b03020;">Table data (names, HP, rolls) is stored in your Firebase cloud DB. Set Realtime Database rules to test mode to start.</div>
+    </div>`;
+  }else if(view==='connect'){
+    b.innerHTML=`
+      <div class="tp-field"><label>Display name</label><input type="text" id="tp-name" value="${esc(val('f-name'))}"></div>
+      <div class="tp-field"><label>Role</label><select id="tp-role"><option value="player">Player</option><option value="curator">Curator</option></select></div>
+      <div class="tp-field"><label>Room code</label><input type="text" id="tp-room" placeholder="WTE-XXXX"></div>
+      <div style="display:flex;gap:6px;">
+        <button class="tp-btn" onclick="tableConnect()">Connect</button>
+        <button class="tp-btn ghost" onclick="document.getElementById('tp-room').value=randCode()">Random</button>
+      </div>
+      <div class="tp-note" style="margin-top:8px;">First in picks Curator + a code; others join with the same code. <a href="#" onclick="Table.clearConfig();return false;">Reset config</a></div>`;
+  }else{
+    b.innerHTML=`
+      <div class="tp-status">Table <b>${esc(Table.room)}</b> &middot; ${esc(Table.name)} (${esc(Table.role)}) <button class="tp-btn ghost" onclick="Table.leave()">Leave</button></div>
+      ${Table.role==='curator'?`<div class="tp-field"><label>Base Pressure (BP) &mdash; shared with table</label><input type="number" id="tp-bp" value="${getV('pe-val')}" oninput="Table.setBP(this.value)"></div>
+      <button class="tp-btn${onlineCiphersOff?'':' ghost'}" id="tp-cipher-toggle" onclick="Table.setOnlineCiphers(!onlineCiphersOff)">${onlineCiphersOff?'Reactivate Online Ciphers':'Deactivate Online Ciphers'}</button>
+      <div class="tp-note">Click a combatant below to set which stats they can roll.</div>`:''}
+      <div class="tp-sec-h">Incoming</div><div id="table-prompts"><div class="tp-empty">No prompts yet.</div></div>
+      <div class="tp-sec-h">Combatants</div><div id="table-roster"></div>
+      <div class="tp-sec-h">Table Log</div><div id="table-log" class="tp-log"></div>`;
+    renderRoster();
+  }
+}
+function tableSaveConfig(){
+  const raw=document.getElementById('fb-config-input').value.trim();
+  let cfg=null;
+  try{ cfg=JSON.parse(raw); }
+  catch(e){ try{ cfg=Function('return ('+raw.match(/\{[\s\S]*\}/)[0]+')')(); }catch(e2){ cfg=null; } }
+  if(!cfg||!cfg.databaseURL||!cfg.apiKey){ toast('Need valid config with databaseURL & apiKey'); return; }
+  localStorage.setItem('wte-fb-config',JSON.stringify(cfg));
+  toast('Config saved'); Table._view=null; renderTablePanel();
+}
+function tableConnect(){
+  const room=document.getElementById('tp-room').value;
+  const role=document.getElementById('tp-role').value;
+  const name=document.getElementById('tp-name').value;
+  Table.connect(room,role,name);
+}
+function renderRoster(){
+  const el=document.getElementById('table-roster'); if(!el)return;
+  const list=Object.entries(Table.combatants||{});
+  el.innerHTML='';
+  if(!list.length){ el.innerHTML='<div class="tp-empty">No one connected yet.</div>'; return; }
+  const gated=(id)=>{const g=Table.gates&&Table.gates[id];return g?ATTRS.concat(SPECS).filter(x=>g[x[0]]===false).length:0;};
+  list.forEach(([id,c])=>{
+    const d=document.createElement('div');d.className='tp-combatant'+(Table.role==='curator'?' clickable':'');
+    const ng=gated(id);
+    d.innerHTML=`<span class="tc-name">${esc(c.name||'?')}${id===Table.clientId?' (you)':''}${ng?` <span style="color:#b88a20;font-size:9px;">&#128274; ${ng} blocked</span>`:''}</span>
+      <span class="tc-hp">HP ${c.hpCur||0}/${c.hpMax||0}${c.dhp?(' &middot; DHP '+c.dhp):''}${c.ss?(' &middot; SS '+c.ss):''}</span>
+      <span class="tc-role">${esc(c.role||'')}</span>`;
+    if(Table.role==='curator')d.onclick=()=>showGateEditor(id);
+    el.appendChild(d);
+  });
+}
+function addLogLine(html){
+  const log=document.getElementById('table-log'); if(!log)return;
+  const t=new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+  const d=document.createElement('div');d.className='tp-log-line';
+  d.innerHTML=`<span class="tl-t">${t}</span> ${html}`;
+  log.prepend(d);
+}
+function showPrompt(e){
+  const wrap=document.getElementById('table-prompts'); if(!wrap)return;
+  if(wrap.querySelector('.tp-empty'))wrap.innerHTML='';
+  const card=document.createElement('div');card.className='tp-prompt';
+  const h=document.createElement('div');h.className='tp-prompt-h';h.innerHTML=`<b>${esc(e.fromName)}</b> &rarr; ${esc(e.ability)}`;
+  card.appendChild(h);
+  const row=document.createElement('div');row.className='action-chips';
+  (e.prompts||[]).forEach(p=>{
+    const b=document.createElement('button');b.type='button';b.className='act-chip';b.textContent=p.label;
+    b.addEventListener('click',()=>fireAction(Object.assign({},p,{label:p.label+' ('+e.ability+')'})));
+    row.appendChild(b);
+  });
+  card.appendChild(row);
+  const x=document.createElement('span');x.className='tp-prompt-x';x.textContent='×';x.onclick=()=>card.remove();
+  card.appendChild(x);
+  wrap.prepend(card);
+  if(!document.getElementById('tablePanel').classList.contains('open'))document.getElementById('tablePanel').classList.add('open');
+  toast(`${e.fromName} used ${e.ability} on you`);
+}
+function closeTargetMenu(){ const m=document.getElementById('tgtMenu'); if(m)m.remove(); }
+function showTargetMenu(ev,ability,actions){
+  closeTargetMenu();
+  ev.stopPropagation();
+  const menu=document.createElement('div');menu.className='tgt-menu';menu.id='tgtMenu';
+  const list=Object.entries(Table.combatants||{});
+  if(!list.length){menu.innerHTML='<div class="tgt-empty">No combatants connected</div>';}
+  list.forEach(([id,c])=>{
+    const b=document.createElement('button');b.type='button';b.className='tgt-item';
+    b.textContent=(c.name||'?')+(id===Table.clientId?' (you)':'');
+    b.onclick=()=>{Table.sendAction(ability,actions,id);closeTargetMenu();toast('Sent to '+(c.name||'target'));};
+    menu.appendChild(b);
+  });
+  document.body.appendChild(menu);
+  const r=ev.currentTarget.getBoundingClientRect();
+  menu.style.left=Math.min(r.left,window.innerWidth-160)+'px';
+  menu.style.top=(r.bottom+4)+'px';
+  setTimeout(()=>document.addEventListener('click',closeTargetMenu,{once:true}),0);
+}
+
+// ── ROLL GATING (Curator-controlled per player) ──
+function tagRollButtons(){
+  document.querySelectorAll('.roll-btn').forEach(b=>{
+    const m=(b.getAttribute('onclick')||'').match(/,\s*'([as]-[a-z]+)'/);
+    if(m)b.dataset.stat=m[1];
+  });
+}
+function applyGateVisuals(){
+  document.querySelectorAll('.roll-btn[data-stat]').forEach(b=>{
+    const ok=gateAllows(b.dataset.stat);
+    b.disabled=!ok; b.style.opacity=ok?'':'0.28'; b.style.cursor=ok?'':'not-allowed';
+  });
+}
+function applyMyGate(){
+  buildPESkills(); applyGateVisuals();
+  const g=(typeof Table!=='undefined'&&Table.connected)?(Table.gates&&Table.gates[Table.clientId]):null;
+  const blocked=g?ATTRS.concat(SPECS).some(x=>g[x[0]]===false):false;
+  const note=document.getElementById('pe-gate-note'); if(note)note.style.display=blocked?'block':'none';
+}
+let gateEditorFor=null;
+function showGateEditor(id){ gateEditorFor=id; renderGateEditor(); }
+function closeGateEditor(){ gateEditorFor=null; const h=document.getElementById('gate-editor'); if(h)h.remove(); }
+function renderGateEditor(){
+  if(!gateEditorFor||!Table.connected||Table.role!=='curator'){ const e=document.getElementById('gate-editor'); if(e)e.remove(); return; }
+  let host=document.getElementById('gate-editor');
+  if(!host){ host=document.createElement('div'); host.id='gate-editor'; host.className='gate-editor';
+    const body=document.getElementById('tableBody'); body.insertBefore(host, body.firstChild); }
+  const c=Table.combatants[gateEditorFor]||{name:'?'};
+  const g=(Table.gates&&Table.gates[gateEditorFor])||{};
+  const tog=(x)=>{ const on=g[x[0]]!==false; return `<button class="gate-tog ${on?'on':'off'}" onclick="Table.setGate('${gateEditorFor}','${x[0]}',${on?'false':'true'})">${x[1]}<span>${on?'ON':'OFF'}</span></button>`; };
+  host.innerHTML=`<div class="ge-head">Roll permissions &mdash; ${esc(c.name||'?')}<span class="ge-x" onclick="closeGateEditor()">&times;</span></div>
+    <div class="ge-grp">Attributes</div><div class="ge-row">${ATTRS.map(tog).join('')}</div>
+    <div class="ge-grp">Specialties</div><div class="ge-row">${SPECS.map(tog).join('')}</div>
+    <div class="ge-foot">
+      <button class="tp-btn ghost" onclick="Table.setAllGate('${gateEditorFor}',true)">All on</button>
+      <button class="tp-btn ghost" onclick="Table.setAllGate('${gateEditorFor}',false)">All off</button>
+      <button class="tp-btn" onclick="closeGateEditor()">Done</button>
+    </div>`;
+}
+function onPEValInput(){
+  updatePEState();
+  if(typeof Table!=='undefined'&&Table.connected&&Table.role==='curator')Table.setBP(document.getElementById('pe-val').value);
+}
+
+// ════════════════════════════════════════════════════
 // INIT
 // ════════════════════════════════════════════════════
 buildInitialRows();
@@ -1669,6 +2586,8 @@ if(_saved){try{applyAll(JSON.parse(_saved));}catch(e){calcAll();updateGenusBtn()
 else{calcAll();updateGenusBtn();updateCipherBtn();}
 selectDie(40);
 updatePEState();
+refreshAllActionChips();
+tagRollButtons();
 </script>
 </body>
 </html>
