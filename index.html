@@ -484,12 +484,14 @@ textarea { resize: vertical; border: 1px solid var(--border); }
   <div class="title">W.T.E Character Sheet</div>
   <div class="topbar-right">
     <button class="btn" onclick="toggleTable()">Table</button>
+    <a class="btn" href="WTE_VTT.html" target="_blank" rel="noopener" style="text-decoration:none;">VTT</a>
     <button class="btn" onclick="toggleDice()">Dice</button>
     <span class="sep">|</span>
     <button class="btn prime" onclick="openExport()">Export</button>
     <button class="btn" onclick="openWiki()">Wiki</button>
     <button class="btn" onclick="saveSheet()">Save</button>
     <button class="btn" onclick="loadSheet()">Load</button>
+    <button class="btn" onclick="openLibrary()">Library</button>
     <button class="btn" onclick="clearSheet()">Clear</button>
     <span class="sep">|</span>
     <button class="btn" onclick="window.print()">Print</button>
@@ -628,8 +630,8 @@ textarea { resize: vertical; border: 1px solid var(--border); }
           <tr><td class="sn">WIS <span class="ss">Wisdom</span></td>
             <td class="c"><div class="score-cell"><input type="number" id="a-wis" min="0" max="20" oninput="calcAll()"><button class="roll-btn" onclick="inlineRoll('WIS Check','a-wis')" title="Roll WIS">d</button></div></td>
             <td class="c"><input class="mod" readonly id="m-wis"></td></tr>
-          <tr><td class="sn">CON <span class="ss">Charisma/Control</span></td>
-            <td class="c"><div class="score-cell"><input type="number" id="a-con" min="0" max="20" oninput="calcAll()"><button class="roll-btn" onclick="inlineRoll('CON Check','a-con')" title="Roll CON">d</button></div></td>
+          <tr><td class="sn">CHA <span class="ss">Charisma</span></td>
+            <td class="c"><div class="score-cell"><input type="number" id="a-con" min="0" max="20" oninput="calcAll()"><button class="roll-btn" onclick="inlineRoll('CHA Check','a-con')" title="Roll Charisma">d</button></div></td>
             <td class="c"><input class="mod" readonly id="m-con"></td></tr>
           <tr><td class="sn">INT <span class="ss">Intelligence</span></td>
             <td class="c"><div class="score-cell"><input type="number" id="a-int" min="0" max="20" oninput="calcAll()"><button class="roll-btn" onclick="inlineRoll('INT Check','a-int')" title="Roll INT">d</button></div></td>
@@ -939,6 +941,21 @@ textarea { resize: vertical; border: 1px solid var(--border); }
   </div>
 </div>
 
+<!-- LIBRARY MODAL -->
+<div class="modal-bg" id="libraryModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <span class="mt">Library &mdash; Character Folders</span>
+      <span class="mx" onclick="closeLibrary()">x</span>
+    </div>
+    <div class="modal-tools">
+      <button class="btn prime" onclick="libNewFolder()" style="color:#fff;">+ New Folder</button>
+      <span class="hint">Organize saved sheets into folders (Bosses, NPCs, Monsters&hellip;). Stored in this browser.</span>
+    </div>
+    <div class="modal-body"><div id="libraryBody"></div></div>
+  </div>
+</div>
+
 <div class="toast" id="toast" style="opacity:0;"></div>
 
 <script>
@@ -977,14 +994,14 @@ const SPECIES_DATA = {
 const BG_STANDARD = [2,2,1,1];
 const BG_FOCUSED  = [4,2];
 
-const ATTRS = [['a-phy','PHY'],['a-dex','DEX'],['a-end','END'],['a-ap','AP'],['a-wis','WIS'],['a-con','CON'],['a-int','INT']];
+const ATTRS = [['a-phy','PHY'],['a-dex','DEX'],['a-end','END'],['a-ap','AP'],['a-wis','WIS'],['a-con','CHA'],['a-int','INT']];
 const SPECS = [['s-ins','Inspiration'],['s-ver','Versatility'],['s-bal','Balance'],['s-wt','Weight'],['s-pre','Precision'],['s-ctrl','Control'],['s-pri','Priority'],['s-wm','Wpn Mastery'],['s-mf','Mental Fort.'],['s-per','Perception'],['s-adp','Adaption'],['s-cun','Cunning']];
 // reducing specialties (Tax Burden contributors) — kept in sync with the derived web
 const REDUCERS = ['s-pre','s-bal','s-adp','s-cun','s-wt','s-ver','s-pri','s-mf','s-ctrl','s-wm','s-per'];
 
 const STAT_OPTIONS = [
   {id:'a-phy',label:'PHY'},{id:'a-dex',label:'DEX'},{id:'a-end',label:'END'},
-  {id:'a-ap',label:'AP'},{id:'a-wis',label:'WIS'},{id:'a-con',label:'CON'},{id:'a-int',label:'INT'},
+  {id:'a-ap',label:'AP'},{id:'a-wis',label:'WIS'},{id:'a-con',label:'CHA'},{id:'a-int',label:'INT'},
   {id:'s-ins',label:'Inspiration'},{id:'s-ver',label:'Versatility'},{id:'s-bal',label:'Balance'},
   {id:'s-wt',label:'Weight'},{id:'s-pre',label:'Precision'},{id:'s-ctrl',label:'Control'},
   {id:'s-pri',label:'Priority'},{id:'s-wm',label:'Wpn Mastery'},{id:'s-mf',label:'Mental Fort.'},
@@ -1198,7 +1215,7 @@ function renderSpecies(){
   document.getElementById('sp-note').textContent=d.note?('— '+d.note):'';
   wikiLink.href=d.url; wikiLink.style.display='inline';
   const bt=document.getElementById('sp-bonus-tags');bt.innerHTML='';
-  const labels={'a-phy':'PHY','a-dex':'DEX','a-end':'END','a-ap':'AP','a-wis':'WIS','a-con':'CON','a-int':'INT'};
+  const labels={'a-phy':'PHY','a-dex':'DEX','a-end':'END','a-ap':'AP','a-wis':'WIS','a-con':'CHA','a-int':'INT'};
   if(Object.keys(d.bonus).length){
     Object.entries(d.bonus).forEach(([id,v])=>{const s=document.createElement('span');s.className='sbtag';s.innerHTML=`${labels[id]} <b>+${v}</b>`;bt.appendChild(s);});
   }else{const s=document.createElement('span');s.className='sbtag';s.textContent='No fixed attribute bonus';bt.appendChild(s);}
@@ -1475,7 +1492,8 @@ function getBgBonuses(){
 // ════════════════════════════════════════════════════
 // RANK
 // ════════════════════════════════════════════════════
-function rankMult(){ const rank=parseInt(document.getElementById('f-level').value)||0; return 1+rank*0.5; }
+const RANK_MULT=[1.00,1.20,1.40,1.45,1.50,1.55,1.60,1.65,1.70,1.75]; // Rank 0..9 (9 = Apex)
+function rankMult(){ const r=Math.max(0,Math.min(9,parseInt(document.getElementById('f-level').value)||0)); return RANK_MULT[r]; }
 function onRankChange(){
   calcAll(); onParadigmChange(); updateGenusBtn(); updateCipherBtn(); updateRankBar();
 }
@@ -1489,8 +1507,8 @@ function updateRankBar(){
   document.getElementById('rb-genus').textContent=5+rank;
   document.getElementById('rb-ciphers').textContent=1+rank;
   document.getElementById('rb-hp').textContent=document.getElementById('d-hpmax').value||'—';
-  document.getElementById('rb-mult').textContent='×'+rankMult().toFixed(1);
-  document.getElementById('pe-mult').textContent='×'+rankMult().toFixed(1);
+  document.getElementById('rb-mult').textContent='×'+rankMult().toFixed(2);
+  document.getElementById('pe-mult').textContent='×'+rankMult().toFixed(2);
 }
 
 // ════════════════════════════════════════════════════
@@ -1762,7 +1780,7 @@ function applyAll(d){
   if(d.__stage)setStage(d.__stage);
   if(d.__cipher)setCipherStatus(d.__cipher);
   // create paradigm/background sub-controls FIRST, then restore the bg-bonus selects
-  onParadigmChange(); onBackgroundChange();
+  onParadigmChange(); onBackgroundChange(false); // false = don't auto-overwrite the saved bonus picks
   document.querySelectorAll('[id^="bg-b"]').forEach(el=>{if(d[el.id]!==undefined)el.value=d[el.id];});
   calcAll(); updateGenusBtn(); updateCipherBtn(); updatePEState(); refreshAllActionChips();
   // pull live cipher/genus data for this paradigm so pickers work after an old-file load
@@ -1790,19 +1808,41 @@ function loadSheet(){
     r.readAsText(e.target.files[0]);
   };inp.click();
 }
+function resetDynamicRows(){
+  // rebuild Asymmetry (4) + Genus (5) from scratch
+  document.getElementById('asym-body').innerHTML=''; asymCount=0;
+  document.getElementById('genus-body').innerHTML=''; genusCount=0;
+  buildInitialRows();
+  // Varna abilities back to 4
+  const vlist=document.getElementById('varna-ability-list'); vlist.innerHTML='';
+  for(let i=1;i<=4;i++){ const d=document.createElement('div'); d.className='aitem'; d.innerHTML=`<span class="anum">${i}.</span><input type="text" id="vs-a${i}">`; vlist.appendChild(d); }
+  varnaAbilityCount=4;
+  // Additional ciphers back to just #2
+  document.getElementById('cipher-list').innerHTML='<div class="aitem"><span class="anum">2.</span><input type="text" id="c2"></div>';
+  cipherCount=2;
+}
 function clearSheet(){
-  if(!confirm('Clear all data?'))return;
-  document.querySelectorAll('input:not([readonly]),textarea').forEach(el=>el.value='');
+  if(!confirm('Clear ALL data and reset the sheet to a blank rank-0 character?'))return;
+  resetDynamicRows();
+  document.querySelectorAll('input:not([readonly]),textarea').forEach(el=>{ if(el.type==='checkbox')el.checked=false; else el.value=''; });
   document.querySelectorAll('select').forEach(el=>el.selectedIndex=0);
   document.querySelectorAll('.spec-in').forEach(el=>el.value='0');
+  document.getElementById('f-level').value='0';
+  document.getElementById('pe-val').value='50';
   document.getElementById('i-nature').dataset.auto='';document.getElementById('i-ability').dataset.auto='';
   setStage('');setCipherStatus('active');
-  document.getElementById('species-box').classList.remove('visible');
-  document.getElementById('paradigm-box').classList.remove('visible');
-  document.getElementById('bg-bonus-box').classList.remove('visible');
-  document.getElementById('pe-val').value=50;
-  onSpeciesChange();
-  calcAll();updateGenusBtn();updateCipherBtn();toast('Cleared.');
+  ['species-box','paradigm-box','bg-bonus-box'].forEach(id=>document.getElementById(id).classList.remove('visible'));
+  if(typeof hideBgMechanic==='function')hideBgMechanic();
+  if(typeof bgMechanicActive!=='undefined')bgMechanicActive=false;
+  // wipe derived/generated UI bits
+  document.querySelectorAll('.action-chips').forEach(c=>c.innerHTML='');
+  ['cipher-options','genus-options'].forEach(id=>{const e=document.getElementById(id);if(e)e.innerHTML='';});
+  const gd=document.getElementById('genus-domain-note'); if(gd)gd.textContent='Pick a Paradigm to filter Genus by its energy domains.';
+  const cd=document.getElementById('cipher-domain-note'); if(cd)cd.textContent='Pick a Paradigm to load its Ciphers.';
+  const cb=document.getElementById('cipher-block-note'); if(cb)cb.style.display='none';
+  onParadigmChange(); onBackgroundChange(); onSpeciesChange();
+  calcAll();updateGenusBtn();updateCipherBtn();updatePEState();refreshAllActionChips();autosave();
+  toast('Cleared.');
 }
 function toast(msg){
   const t=document.getElementById('toast');t.textContent=msg;t.style.opacity='1';
@@ -1925,7 +1965,7 @@ function clearHistory(){
 // ════════════════════════════════════════════════════
 const ATTR_VOCAB={strength:'a-phy',dexterity:'a-dex',endurance:'a-end','action priority':'a-ap',wisdom:'a-wis',charisma:'a-con',intelligence:'a-int',phy:'a-phy',dex:'a-dex',end:'a-end',ap:'a-ap',wis:'a-wis',con:'a-con',int:'a-int'};
 const SPEC_VOCAB={inspiration:'s-ins',versatility:'s-ver',balance:'s-bal',weight:'s-wt',precision:'s-pre',control:'s-ctrl',priority:'s-pri','weapon mastery':'s-wm','mental fortitude':'s-mf',perception:'s-per',adaptation:'s-adp',adaption:'s-adp',cunning:'s-cun'};
-const ATTR_CODE={'a-phy':'PHY','a-dex':'DEX','a-end':'END','a-ap':'AP','a-wis':'WIS','a-con':'CON','a-int':'INT'};
+const ATTR_CODE={'a-phy':'PHY','a-dex':'DEX','a-end':'END','a-ap':'AP','a-wis':'WIS','a-con':'CHA','a-int':'INT'};
 function specLabel(id){const f=SPECS.find(s=>s[0]===id);return f?f[1]:id;}
 // Parse free-text effect → [{label, kind:'attr'|'spec'|'dice', stat?/expr?}]
 function parseEffectActions(text){
@@ -2238,6 +2278,36 @@ function copyWikiTemplate(){
 document.getElementById('wikiModal').addEventListener('click',e=>{if(e.target.id==='wikiModal')closeWiki();});
 
 // ════════════════════════════════════════════════════
+// LIBRARY — folders of saved character sheets (Bosses / NPCs / Monsters…)
+// ════════════════════════════════════════════════════
+function libGet(){ try{return JSON.parse(localStorage.getItem('wte-library')||'{"folders":{}}');}catch(e){return {folders:{}};} }
+function libSet(l){ localStorage.setItem('wte-library',JSON.stringify(l)); }
+function jsq(s){ return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
+function openLibrary(){ renderLibrary(); document.getElementById('libraryModal').classList.add('open'); }
+function closeLibrary(){ document.getElementById('libraryModal').classList.remove('open'); }
+function libNewFolder(){ const n=(prompt('Folder name (e.g. Bosses, NPCs, Monsters):')||'').trim(); if(!n)return; const l=libGet(); if(!l.folders[n])l.folders[n]=[]; libSet(l); renderLibrary(); }
+function libDeleteFolder(n){ if(!confirm('Delete folder "'+n+'" and all sheets inside it?'))return; const l=libGet(); delete l.folders[n]; libSet(l); renderLibrary(); }
+function libSaveCurrent(folder){ const l=libGet(); const arr=l.folders[folder]||[]; const name=(document.getElementById('f-name').value||'Unnamed').trim(); const data=collectAll(); const ex=arr.find(e=>e.name.toLowerCase()===name.toLowerCase()); if(ex)ex.data=data; else arr.push({id:Math.random().toString(36).slice(2,9),name,data}); l.folders[folder]=arr; libSet(l); renderLibrary(); toast('Saved "'+name+'" → '+folder); }
+function libLoad(folder,id){ const l=libGet(); const e=(l.folders[folder]||[]).find(x=>x.id===id); if(!e)return; if(!confirm('Load "'+e.name+'" into the sheet? Current unsaved changes will be replaced.'))return; applyAll(e.data); closeLibrary(); toast('Loaded '+e.name); }
+function libDelete(folder,id){ const l=libGet(); const e=(l.folders[folder]||[]).find(x=>x.id===id); if(e&&!confirm('Remove "'+e.name+'" from '+folder+'?'))return; l.folders[folder]=(l.folders[folder]||[]).filter(x=>x.id!==id); libSet(l); renderLibrary(); }
+function renderLibrary(){
+  const l=libGet(), body=document.getElementById('libraryBody'), folders=Object.keys(l.folders);
+  if(!folders.length){ body.innerHTML='<div style="color:var(--muted);font-style:italic;font-size:12px;">No folders yet. Create one (e.g. &ldquo;Bosses&rdquo;) to start saving sheets.</div>'; return; }
+  body.innerHTML=folders.map(f=>{
+    const entries=l.folders[f]||[];
+    const rows=entries.length ? entries.map(e=>`<div style="display:flex;align-items:center;gap:8px;padding:3px 2px;border-bottom:1px solid var(--border);"><span style="flex:1;font-size:13px;">${esc(e.name)}</span><button class="btn" onclick="libLoad('${jsq(f)}','${e.id}')">Load</button><span style="cursor:pointer;color:#b03020;font-size:15px;padding:0 4px;" onclick="libDelete('${jsq(f)}','${e.id}')" title="Remove">&times;</span></div>`).join('') : '<div style="color:var(--muted);font-style:italic;font-size:11px;padding:3px 0;">Empty.</div>';
+    return `<div style="border:1px solid var(--border2);margin-bottom:12px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;background:var(--info-bg);padding:6px 10px;border-bottom:1px solid var(--border);">
+        <b style="font-size:12px;letter-spacing:1px;">${esc(f)} <span style="color:var(--muted);font-weight:normal;">(${entries.length})</span></b>
+        <span><button class="btn" onclick="libSaveCurrent('${jsq(f)}')">+ Save current sheet</button> <span style="cursor:pointer;color:#b03020;font-size:15px;padding:0 4px;" onclick="libDeleteFolder('${jsq(f)}')" title="Delete folder">&times;</span></span>
+      </div>
+      <div style="padding:6px 10px;">${rows}</div>
+    </div>`;
+  }).join('');
+}
+document.getElementById('libraryModal').addEventListener('click',e=>{if(e.target.id==='libraryModal')closeLibrary();});
+
+// ════════════════════════════════════════════════════
 // BACKGROUND MECHANICS — scraped from the Background page
 // ════════════════════════════════════════════════════
 let BACKGROUND_DATA=null, bgMechanicActive=false;
@@ -2315,14 +2385,30 @@ function loadFirebase(){
   return window.__fbLoading;
 }
 
+// Gather the character's actionable abilities + stats so the VTT can use them
+function gatherActorStats(){ const s={}; ATTRS.forEach(a=>{ s[a[0]]=getV(a[0]); s['m-'+a[0].slice(2)]=getV('m-'+a[0].slice(2)); }); SPECS.forEach(x=>{ s[x[0]]=getV(x[0]); }); return s; }
+function gatherActorAbilities(){
+  const out=[]; const basics=[];
+  ATTRS.forEach(a=>basics.push({label:a[1]+' Check',kind:'attr',stat:a[0]}));
+  SPECS.forEach(x=>basics.push({label:specLabel(x[0])+' Check',kind:'spec',stat:x[0]}));
+  out.push({name:'Checks',actions:basics});
+  const sp=val('f-species'); const d=(sp&&typeof mergedSpecies==='function')?mergedSpecies(sp):null;
+  if(d){ const ia=parseEffectActions(d.innate.map(a=>a.title).filter(Boolean).join('  ')); if(ia.length)out.push({name:sp+' (innate)',actions:ia});
+    const v=val('f-variant'); if(v&&d.variants[v]){ const va=parseEffectActions(d.variants[v].map(a=>a.title).filter(Boolean).join('  ')); if(va.length)out.push({name:v,actions:va}); } }
+  for(let i=1;i<=genusCount;i++){ const nm=val('gn-name-'+i),fx=val('gn-fx-'+i); if(!fx)continue; const acts=parseEffectActions(fx); if(acts.length)out.push({name:nm||('Genus '+i),actions:acts}); }
+  for(let i=1;i<=4;i++){ const nm=val('w'+i+'-name'),dmg=val('w'+i+'-dmg'); if(!nm)continue; const acts=[]; parseEffectActions(dmg).filter(a=>a.kind==='dice').forEach(a=>acts.push({label:'Damage '+a.expr,kind:'dice',expr:a.expr})); acts.push({label:'Attack (Wpn Mastery)',kind:'spec',stat:'s-wm'}); out.push({name:nm,actions:acts}); }
+  const cb=val('c-benefits'); if(cb){ const acts=parseEffectActions(cb); if(acts.length)out.push({name:val('c-pick')||'Cipher',actions:acts}); }
+  return out;
+}
 const Table={
   connected:false, room:null, role:'player', name:'', db:null, ref:null, evRef:null,
-  combatants:{}, gates:{}, _startTs:0, _view:null,
+  combatants:{}, gates:{}, bgMech:{}, _startTs:0, _view:null,
   get clientId(){return clientId();},
   setBP(v){ if(this.connected&&this.role==='curator')this.ref.child('state/bp').set(parseInt(v)||0); },
   setGate(id,statId,allowed){ if(this.connected&&this.role==='curator')this.ref.child('gates/'+id+'/'+statId).set(!!allowed); },
   setAllGate(id,allowed){ if(!(this.connected&&this.role==='curator'))return; const m={}; ATTRS.concat(SPECS).forEach(x=>m[x[0]]=!!allowed); this.ref.child('gates/'+id).set(m); },
   setOnlineCiphers(off){ if(this.connected&&this.role==='curator'){ this.ref.child('state/onlineCiphersOff').set(!!off); this.log('Curator '+(off?'DEACTIVATED':'reactivated')+' all Online Ciphers'); } },
+  setBgMech(id,on){ if(this.connected&&this.role==='curator'){ this.ref.child('bgMech/'+id).set(!!on); this.log('Curator '+(on?'activated':'deactivated')+' '+((this.combatants[id]||{}).name||'a')+' background mechanic'); } },
   config(){ try{return JSON.parse(localStorage.getItem('wte-fb-config')||'null');}catch(e){return null;} },
   clearConfig(){ localStorage.removeItem('wte-fb-config'); renderTablePanel(); },
   async connect(room,role,name){
@@ -2350,6 +2436,8 @@ const Table={
       const t=document.getElementById('tp-bp'); if(t&&document.activeElement!==t)t.value=bp;
     });
     this.ref.child('state/onlineCiphersOff').on('value',s=>{ onlineCiphersOff=!!s.val(); applyOnlineCipherState(); updateCipherToggleBtn(); });
+    this.ref.child('bgMech').on('value',s=>{ this.bgMech=s.val()||{}; applyBgMechState(); renderGateEditor(); });
+    applyBgMechState();
     const pv=document.getElementById('pe-val'); if(pv)pv.disabled=(this.role!=='curator');
     this._startTs=Date.now();
     this.evRef=this.ref.child('events');
@@ -2360,14 +2448,14 @@ const Table={
   leave(){
     try{
       if(this.ref){
-        this.ref.child('combatants').off(); this.ref.child('gates').off(); this.ref.child('state/bp').off(); this.ref.child('state/onlineCiphersOff').off();
+        this.ref.child('combatants').off(); this.ref.child('gates').off(); this.ref.child('bgMech').off(); this.ref.child('state/bp').off(); this.ref.child('state/onlineCiphersOff').off();
         if(this.evRef)this.evRef.off();
         this.ref.child('members/'+this.clientId).remove();
         this.ref.child('combatants/'+this.clientId).remove();
       }
     }catch(e){}
-    this.connected=false; this.ref=null; this.evRef=null; this.combatants={}; this.gates={};
-    onlineCiphersOff=false; applyOnlineCipherState();
+    this.connected=false; this.ref=null; this.evRef=null; this.combatants={}; this.gates={}; this.bgMech={};
+    onlineCiphersOff=false; applyOnlineCipherState(); applyBgMechState();
     const pv=document.getElementById('pe-val'); if(pv)pv.disabled=false;
     closeGateEditor(); applyMyGate();
     renderTablePanel(); refreshAllActionChips();
@@ -2378,6 +2466,7 @@ const Table={
       name:val('f-name')||this.name, ownerId:this.clientId, ownerName:this.name, role:this.role,
       species:val('f-species'), variant:val('f-variant'),
       hpMax:getV('d-hpmax'), hpCur:getV('d-hpcur'), dhp:getV('d-dhpcur'), ss:getV('d-sscur'),
+      abilities:gatherActorAbilities(), stats:gatherActorStats(),
       ts:Date.now()
     });
   },
@@ -2562,9 +2651,12 @@ function renderGateEditor(){
   const c=Table.combatants[gateEditorFor]||{name:'?'};
   const g=(Table.gates&&Table.gates[gateEditorFor])||{};
   const tog=(x)=>{ const on=g[x[0]]!==false; return `<button class="gate-tog ${on?'on':'off'}" onclick="Table.setGate('${gateEditorFor}','${x[0]}',${on?'false':'true'})">${x[1]}<span>${on?'ON':'OFF'}</span></button>`; };
+  const mechOn=!!(Table.bgMech&&Table.bgMech[gateEditorFor]);
   host.innerHTML=`<div class="ge-head">Roll permissions &mdash; ${esc(c.name||'?')}<span class="ge-x" onclick="closeGateEditor()">&times;</span></div>
     <div class="ge-grp">Attributes</div><div class="ge-row">${ATTRS.map(tog).join('')}</div>
     <div class="ge-grp">Specialties</div><div class="ge-row">${SPECS.map(tog).join('')}</div>
+    <div class="ge-grp">Background Mechanic (confirm trigger)</div>
+    <div class="ge-row"><button class="gate-tog ${mechOn?'on':'off'}" onclick="Table.setBgMech('${gateEditorFor}',${mechOn?'false':'true'})">Active Trigger<span>${mechOn?'ON':'OFF'}</span></button></div>
     <div class="ge-foot">
       <button class="tp-btn ghost" onclick="Table.setAllGate('${gateEditorFor}',true)">All on</button>
       <button class="tp-btn ghost" onclick="Table.setAllGate('${gateEditorFor}',false)">All off</button>
