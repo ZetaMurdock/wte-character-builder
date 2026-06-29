@@ -119,7 +119,7 @@ textarea { resize: vertical; border: 1px solid var(--border); }
 .act-chips-lbl { font-size:8px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-right:1px; }
 .act-chip { display:inline-flex; align-items:center; gap:4px; background:var(--accent); color:#fff; border:none; cursor:pointer; font-family:'Georgia',serif; font-size:10px; padding:2px 9px; transition:all .1s; }
 .act-chip:hover { background:#a07f44; }
-.act-chip::before { content:'\2680'; font-size:11px; line-height:1; opacity:.85; }
+.act-chip::before { content:''; }
 
 /* BACKGROUND BONUS */
 .bg-bonus-row { display: flex; gap: 8px; align-items: end; flex-wrap: wrap; margin-top: 8px; }
@@ -833,7 +833,7 @@ textarea { resize: vertical; border: 1px solid var(--border); }
       <div class="wpn-type-hint" id="cipher-domain-note">Pick a Paradigm to load its Ciphers.</div>
       <datalist id="cipher-options"></datalist>
       <div class="field"><label>Cipher (pick from Paradigm)</label><input type="text" id="c-pick" list="cipher-options" autocomplete="off" onfocus="loadCiphersForParadigm()" onchange="onCipherPick()" placeholder="search ciphers…"></div>
-      <div id="cipher-block-note" class="pe-gated-note" style="display:none;">&#9888; Online Ciphers deactivated by the Curator.</div>
+      <div id="cipher-block-note" class="pe-gated-note" style="display:none;">Online Ciphers deactivated by the Curator.</div>
       <div class="cgrid">
         <div class="field"><label>Type</label><select id="c-type" onchange="applyOnlineCipherState()"><option>Offline</option><option>Online</option></select></div>
         <div class="field"><label>TL</label><input type="number" id="c-tl" min="1" max="5" step="0.5"></div>
@@ -1174,9 +1174,9 @@ async function fetchSpeciesWiki(name){
 function setSpeciesSync(state){
   const el=document.getElementById('sp-sync'); if(!el)return;
   if(!state){el.textContent='';return;}
-  if(state==='loading'){el.textContent='⟳ syncing…';el.style.color='var(--muted)';}
-  else if(state==='synced'){el.textContent='✓ synced from wiki';el.style.color='#3a8050';}
-  else{el.textContent='⚠ offline — local data';el.style.color='#b88a20';}
+  if(state==='loading'){el.textContent='syncing…';el.style.color='var(--muted)';}
+  else if(state==='synced'){el.textContent='synced from wiki';el.style.color='#3a8050';}
+  else{el.textContent='offline — local data';el.style.color='#b88a20';}
 }
 // Merge local (numbers/fallback) with cached wiki abilities → {label,title}[] chips
 function mergedSpecies(sp){
@@ -2011,7 +2011,7 @@ function renderActions(containerId,actions,prefix,sourceLabel){
     el.appendChild(b);
   });
   if(Table.connected&&sourceLabel){
-    const sb=document.createElement('button');sb.type='button';sb.className='act-send';sb.textContent='▸ Use on…';
+    const sb=document.createElement('button');sb.type='button';sb.className='act-send';sb.textContent='Use on…';
     sb.title='Send these checks to a target at the table';
     sb.addEventListener('click',ev=>showTargetMenu(ev,sourceLabel,actions));
     el.appendChild(sb);
@@ -2393,11 +2393,11 @@ function gatherActorAbilities(){
   SPECS.forEach(x=>basics.push({label:specLabel(x[0])+' Check',kind:'spec',stat:x[0]}));
   out.push({name:'Checks',actions:basics});
   const sp=val('f-species'); const d=(sp&&typeof mergedSpecies==='function')?mergedSpecies(sp):null;
-  if(d){ const ia=parseEffectActions(d.innate.map(a=>a.title).filter(Boolean).join('  ')); if(ia.length)out.push({name:sp+' (innate)',actions:ia});
-    const v=val('f-variant'); if(v&&d.variants[v]){ const va=parseEffectActions(d.variants[v].map(a=>a.title).filter(Boolean).join('  ')); if(va.length)out.push({name:v,actions:va}); } }
-  for(let i=1;i<=genusCount;i++){ const nm=val('gn-name-'+i),fx=val('gn-fx-'+i); if(!fx)continue; const acts=parseEffectActions(fx); if(acts.length)out.push({name:nm||('Genus '+i),actions:acts}); }
-  for(let i=1;i<=4;i++){ const nm=val('w'+i+'-name'),dmg=val('w'+i+'-dmg'); if(!nm)continue; const acts=[]; parseEffectActions(dmg).filter(a=>a.kind==='dice').forEach(a=>acts.push({label:'Damage '+a.expr,kind:'dice',expr:a.expr})); acts.push({label:'Attack (Wpn Mastery)',kind:'spec',stat:'s-wm'}); out.push({name:nm,actions:acts}); }
-  const cb=val('c-benefits'); if(cb){ const acts=parseEffectActions(cb); if(acts.length)out.push({name:val('c-pick')||'Cipher',actions:acts}); }
+  if(d){ const itext=d.innate.map(a=>a.title).filter(Boolean).join('  '); const ia=parseEffectActions(itext); if(ia.length)out.push({name:sp+' (innate)',actions:ia,fx:itext});
+    const v=val('f-variant'); if(v&&d.variants[v]){ const vt=d.variants[v].map(a=>a.title).filter(Boolean).join('  '); const va=parseEffectActions(vt); if(va.length)out.push({name:v,actions:va,fx:vt}); } }
+  for(let i=1;i<=genusCount;i++){ const nm=val('gn-name-'+i),fx=val('gn-fx-'+i); if(!fx)continue; const acts=parseEffectActions(fx); if(acts.length)out.push({name:nm||('Genus '+i),actions:acts,fx:fx}); }
+  for(let i=1;i<=4;i++){ const nm=val('w'+i+'-name'),dmg=val('w'+i+'-dmg'); if(!nm)continue; const acts=[]; parseEffectActions(dmg).filter(a=>a.kind==='dice').forEach(a=>acts.push({label:'Damage '+a.expr,kind:'dice',expr:a.expr})); acts.push({label:'Attack (Wpn Mastery)',kind:'spec',stat:'s-wm'}); out.push({name:nm,actions:acts,fx:'attack '+dmg}); }
+  const cb=val('c-benefits'); if(cb){ const acts=parseEffectActions(cb); if(acts.length)out.push({name:val('c-pick')||'Cipher',actions:acts,fx:cb}); }
   return out;
 }
 const Table={
@@ -2568,7 +2568,7 @@ function renderRoster(){
   list.forEach(([id,c])=>{
     const d=document.createElement('div');d.className='tp-combatant'+(Table.role==='curator'?' clickable':'');
     const ng=gated(id);
-    d.innerHTML=`<span class="tc-name">${esc(c.name||'?')}${id===Table.clientId?' (you)':''}${ng?` <span style="color:#b88a20;font-size:9px;">&#128274; ${ng} blocked</span>`:''}</span>
+    d.innerHTML=`<span class="tc-name">${esc(c.name||'?')}${id===Table.clientId?' (you)':''}${ng?` <span style="color:#b88a20;font-size:9px;">(${ng} blocked)</span>`:''}</span>
       <span class="tc-hp">HP ${c.hpCur||0}/${c.hpMax||0}${c.dhp?(' &middot; DHP '+c.dhp):''}${c.ss?(' &middot; SS '+c.ss):''}</span>
       <span class="tc-role">${esc(c.role||'')}</span>`;
     if(Table.role==='curator')d.onclick=()=>showGateEditor(id);
